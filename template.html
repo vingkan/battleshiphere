@@ -3,6 +3,8 @@
 <html>
 	<head>
 		<title>HERE Battleship</title>
+		<!-- META TAGS -->
+		<meta name="viewport" content="initial-scale=1.0, width=device-width" />
 		<!-- STYLESHEETS -->
 		<link rel="stylesheet" type="text/css" href="style/reset.css">
 		<link rel="stylesheet" type="text/css" href="style/main.css">
@@ -10,6 +12,8 @@
 		<!-- IMPORTED SCRIPTS -->
 		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
 		<script src='https://cdn.firebase.com/js/client/2.2.1/firebase.js'></script>
+		<script type="text/javascript" src="http://js.api.here.com/v3/3.0/mapsjs-core.js"></script>
+		<script type="text/javascript" src="http://js.api.here.com/v3/3.0/mapsjs-service.js"></script>
 		<style type="text/css">
 
 
@@ -29,6 +33,11 @@
 		<script type="text/javascript">
 
 			console.log('Hello World!');
+
+			var platform = new H.service.Platform({
+				'app_id': '{' + APP_ID + '}',
+				'app_code': '{' + APP_CODE + '}'
+			});
 
 		</script>
 
