@@ -4,25 +4,25 @@
 
 function initHereMap(){
 
-	var platform = new H.service.Platform({
-		'app_id': APP_ID,
-		'app_code': APP_CODE
-	});
+	nokia.Settings.set('app_id', APP_ID);
+	nokia.Settings.set('app_code', APP_CODE);
 
-	var mapTypes = platform.createDefaultLayers();
-	var map = new H.Map(
+	var map = new nokia.maps.map.Display(
 		document.getElementById('map-container'),
-		mapTypes.satellite.map,
 		{
-			zoom: 18,
-			center: {
-				lat: getUserLat(),
-				lng: getUserLon()
-			}
+			components: [
+				new nokia.maps.map.component.Behavior()
+			],
+			zoomLevel: 10,
+			center: [
+				getUserLat(),
+				getUserLon()
+			],
+			baseMapType: nokia.maps.map.Display.SATELLITE
 		}
 	);
 
-	var icon = new H.map.Icon('style/img/hmarker.png');
+	/*var icon = new H.map.Icon('style/img/hmarker.png');
 	var marker = new H.map.Marker(
 		{
 			lat: getUserLat(),
@@ -35,7 +35,7 @@ function initHereMap(){
 
 	map.addObject(marker);
 
-	var ui = H.ui.UI.createDefault(map, mapTypes);
+	var ui = H.ui.UI.createDefault(map, mapTypes);*/
 	
 	console.log('LOADED HERE MAP');
 
