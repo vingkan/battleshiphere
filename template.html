@@ -16,7 +16,10 @@
 		<script type="text/javascript" src="http://js.api.here.com/v3/3.0/mapsjs-service.js"></script>
 		<style type="text/css">
 
-
+			div#map-container{
+				width: 100vw;
+				height: 80vh;
+			}
 
 		</style>
 	</head>
@@ -34,21 +37,26 @@
 
 		<script type="text/javascript">
 
-			console.log('Hello World!');
-
 			var platform = new H.service.Platform({
-				'app_id': '{' + APP_ID + '}',
-				'app_code': '{' + APP_CODE + '}'
+				'app_id': APP_ID,
+				'app_code': APP_CODE
 			});
 
-			/*var map = new H.Map(
+			var maptypes = platform.createDefaultLayers();
+
+			var map = new H.Map(
 				document.getElementById('map-container'),
-				defaultLayers.normal.map,
+				maptypes.normal.map,
 				{
-					zoom: 10,
-					center: {}
+					zoom: 12,
+					center: {
+						lat: 41.833500699999995,//getUserLat(),
+						lng: -87.626014//getUserLon()
+					}
 				}
-			);*/
+			);
+
+			console.log('LOADED MAIN');
 
 		</script>
 
