@@ -1,4 +1,27 @@
 /*--------------------------------------------*/
+/*---> SHIP OBJECT <--------------------------*/
+/*--------------------------------------------*/
+
+function Game(data){
+	this.name = data['name'];
+	this.players = data['players'];
+	this.ships = data['ships'];
+}
+
+function Ship(data){
+	this.name = data['name'];
+	this.player = data['player'];
+	this.coordinates = {
+		latitude: data['latitude'],
+		longitude: data['longitude']
+	};
+}
+
+Ship.prototype.toString = function(){
+	return 'Ship ' + this.name + ' belongs to ' + this.player;
+}
+
+/*--------------------------------------------*/
 /*---> GEOLOCATION <--------------------------*/
 /*--------------------------------------------*/
 
