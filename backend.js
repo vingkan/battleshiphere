@@ -5,15 +5,23 @@ var APP_CODE = 'SB1wcsUEGzLA3SRHJJ7CPw';
 // Reference to the root of the Firebase database
 var database = new Firebase("https://brilliant-torch-6592.firebaseio.com/");
 
-$("#messageInput").keypress(function (e) {
-	if (e.keyCode == 13) {
-		var name = $("#nameInput").val();
-		var text = $("#messageInput").val();
+$("#upload").click(function() {
+	var name = $("#nameInput").val();
+	var text = $("#messageInput").val();
+	if (name.length != 0 && text.length != 0) { // Don't upload if there's no information in the textboxes
+		console.log(name.length);
+		console.log(text.length);
+
 		database.push({name: name, text: text});
-		$("#messageInput").val("");
+
+		database.on('child_added', function(update) {
+			console.log("Callback function: New data has been added to the database");
+		});
+	}else {
+		console.log("Please input values into the textbox");
 	}
-
-
+	
 });
+
 
 console.log('LOADED BACKEND');
