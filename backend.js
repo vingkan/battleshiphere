@@ -3,7 +3,7 @@ var APP_ID = 'YtKfTS2Zo8ELUk63LzB0';
 var APP_CODE = 'SB1wcsUEGzLA3SRHJJ7CPw';
 
 // Reference to the root of the Firebase database
-var database = new Firebase("https://brilliant-torch-6592.firebaseio.com/");
+var database = new Firebase("https://battleshiphere.firebaseio.com/");
 
 $("#upload").click(function() {
 	var name = $("#nameInput").val();
@@ -22,6 +22,8 @@ $("#upload").click(function() {
 	}
 	
 });
+
+
 
 
 console.log('LOADED BACKEND');
