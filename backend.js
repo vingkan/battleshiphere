@@ -16,12 +16,18 @@ $("#upload").click(function() { // If the user clicks on the input with the id="
 
 		database.push({name: name, text: text}); // Push the data onto the database
 
-		database.on('child_added', function(update) { // Get an update once the database has new data
-			console.log("Callback function: New data has been added to the database");
-		});
 	}else { // warns user of their empty textbox
 		console.log("Please input values into the textbox");
 	}
-	
 });
 
+database.on('child_added', function(update) { // Get an update once the database has new data
+			console.log("Callback function: New data has been added to the database");
+			var message = update.val();
+			displayUpdate(message.name, message.text);
+});
+
+function displayUpdate(name, text) {
+	$("<div/>").text(text).prepend($("<em/>").text(name+": ")).appendTo($("#messageDiv"));
+	$("#messageDiv")[0].scrollTop = $("#messageDiv")[0].scrollHeight;
+}
