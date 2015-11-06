@@ -44,17 +44,33 @@
 
 			var maptypes = platform.createDefaultLayers();
 
+			var userLat = getUserLat();
+			var userLon = getUserLon();
+			console.log('lat: ' + userLat + ', lon:' + userLon);
 			var map = new H.Map(
 				document.getElementById('map-container'),
 				maptypes.normal.map,
 				{
 					zoom: 12,
 					center: {
-						lat: 41.833500699999995,//getUserLat(),
-						lng: -87.626014//getUserLon()
+						lat: userLat,
+						lng: userLon
 					}
 				}
 			);
+
+			var icon = new H.map.Icon('style/img/hmarker.png');
+			var marker = new H.map.Marker(
+				{
+					lat: getUserLat(),
+					lng: getUserLon()
+				},
+				{
+					icon: icon
+				}
+			);
+
+			map.addObject(marker);
 
 			console.log('LOADED MAIN');
 

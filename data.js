@@ -2,10 +2,14 @@
 /*---> GEOLOCATION <--------------------------*/
 /*--------------------------------------------*/
 
-var userPosition;
+var userPosition = {
+	latitude: 0,
+	longitude: 0
+};
 
 function updatePosition(position){
-	userPosition = position.coords;
+	userPosition.latitude = position.coords.latitude;
+	userPosition.longitude = position.coords.longitude;
 }
 
 navigator.geolocation.getCurrentPosition(function(position){
