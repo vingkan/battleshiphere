@@ -37,24 +37,22 @@
 
 		<script type="text/javascript">
 
+		function initHereMap(){
+
 			var platform = new H.service.Platform({
 				'app_id': APP_ID,
 				'app_code': APP_CODE
 			});
 
-			var maptypes = platform.createDefaultLayers();
-
-			var userLat = getUserLat();
-			var userLon = getUserLon();
-			console.log('lat: ' + userLat + ', lon:' + userLon);
+			var mapTypes = platform.createDefaultLayers();
 			var map = new H.Map(
 				document.getElementById('map-container'),
-				maptypes.normal.map,
+				mapTypes.normal.map,
 				{
 					zoom: 12,
 					center: {
-						lat: userLat,
-						lng: userLon
+						lat: getUserLat(),
+						lng: getUserLon()
 					}
 				}
 			);
@@ -71,8 +69,14 @@
 			);
 
 			map.addObject(marker);
+			
+			console.log('LOADED HERE MAP');
 
-			console.log('LOADED MAIN');
+		}
+
+		getGeolocation(initHereMap);
+
+		console.log('LOADED MAIN');
 
 		</script>
 

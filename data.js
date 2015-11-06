@@ -12,10 +12,15 @@ function updatePosition(position){
 	userPosition.longitude = position.coords.longitude;
 }
 
-navigator.geolocation.getCurrentPosition(function(position){
-	updatePosition(position);
-});
-
+function getGeolocation(callback){
+	navigator.geolocation.getCurrentPosition(function(position){
+		updatePosition(position);
+		console.log('CALLED GEOLOCATOR');
+		if(callback){
+			callback();
+		}
+	});
+}
 
 function getUserLat(){
 	return userPosition.latitude;
