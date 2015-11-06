@@ -6,11 +6,11 @@
 
 ##Ships Object
 
-	###Ship()
-	Constructor for the Ship class.
+###Ship()
+Constructor for the Ship class.
 
-	###Ship.toString()
-	Returns a string representation of a Ship object.
+###Ship.toString()
+Returns a string representation of a Ship object.
 
 ##Geolocation
 
