@@ -22,7 +22,7 @@ function initHereMap(){
 		}
 	);
 
-	/*var icon = new H.map.Icon('style/img/hmarker.png');
+	var icon = new H.map.Icon('style/img/hmarker.png');
 	var marker = new H.map.Marker(
 		{
 			lat: getUserLat(),
@@ -33,12 +33,9 @@ function initHereMap(){
 		}
 	);
 
-	map.addObject(marker);*/
+	map.addObject(marker);
 
 	var ui = H.ui.UI.createDefault(map, mapTypes);
-	var zoom = ui.getControl('zoom');
-	console.log(zoom)
-	//zoom.setEnabled(true);
 	
 	console.log('LOADED HERE MAP');
 

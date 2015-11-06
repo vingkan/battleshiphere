@@ -5,22 +5,24 @@
 		<title>HERE Battleship</title>
 		<!-- META TAGS -->
 		<meta name="viewport" content="initial-scale=1.0, width=device-width" />
+		<!-- HERE MAPS API -->
+		<script type="text/javascript" src="http://js.api.here.com/v3/3.0/mapsjs-core.js"></script>
+		<script type="text/javascript" src="http://js.api.here.com/v3/3.0/mapsjs-service.js"></script>
+		<script type="text/javascript" src="http://js.api.here.com/v3/3.0/mapsjs-ui.js"></script>
+		<link rel="stylesheet" type="text/css" href="http://js.api.here.com/v3/3.0/mapsjs-ui.css">
 		<!-- STYLESHEETS -->
 		<link rel="stylesheet" type="text/css" href="style/reset.css">
-		<style type="text/css" src="http://js.api.here.com/v3/3.0/mapsjs-ui.css"></style>
 		<link rel="stylesheet" type="text/css" href="style/main.css">
 		<link href='https://fonts.googleapis.com/css?family=Titillium+Web:400,700,400italic|Bevan' rel='stylesheet' type='text/css'>
 		<!-- IMPORTED SCRIPTS -->
 		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
 		<script src='https://cdn.firebase.com/js/client/2.2.1/firebase.js'></script>
-		<script type="text/javascript" src="http://js.api.here.com/v3/3.0/mapsjs-core.js"></script>
-		<script type="text/javascript" src="http://js.api.here.com/v3/3.0/mapsjs-service.js"></script>
-		<script type="text/javascript" src="http://js.api.here.com/v3/3.0/mapsjs-ui.js"></script>
 		<style type="text/css">
 
 			div#map-container{
 				width: 100vw;
 				height: 80vh;
+				position: absolute;
 			}
 
 		</style>
