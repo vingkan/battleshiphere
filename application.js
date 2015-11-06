@@ -11,9 +11,13 @@ function initHereMap(){
 		document.getElementById('map-container'),
 		{
 			components: [
-				new nokia.maps.map.component.Behavior()
+				new nokia.maps.map.component.Behavior(),
+				new nokia.maps.map.component.ZoomBar(),
+				new nokia.maps.map.component.Overview(),
+				new nokia.maps.map.component.TypeSelector(),
+				new nokia.maps.map.component.ScaleBar()
 			],
-			zoomLevel: 10,
+			zoomLevel: 20,
 			center: [
 				getUserLat(),
 				getUserLon()
@@ -22,20 +26,33 @@ function initHereMap(){
 		}
 	);
 
-	/*var icon = new H.map.Icon('style/img/hmarker.png');
-	var marker = new H.map.Marker(
+	var vinesh = new nokia.maps.map.StandardMarker(
+		[
+			getUserLat(),
+			getUserLon()
+		],
 		{
-			lat: getUserLat(),
-			lng: getUserLon()
-		},
-		{
-			icon: icon
+			text: "Vinesh",
+			draggable: true
 		}
 	);
 
-	map.addObject(marker);
+	var here = new nokia.maps.map.Marker(
+		new nokia.maps.geo.Coordinate(
+			getUserLat(),
+			getUserLon()
+		),
+		{
+			title: "HERE",
+			visibility: true,
+			icon: "style/img/hmarker.png",
+			draggable: true,
+			anchor: new nokia.maps.util.Point(16, 32)
+		}
+	);
 
-	var ui = H.ui.UI.createDefault(map, mapTypes);*/
+	map.objects.add(vinesh);
+	map.objects.add(here);
 	
 	console.log('LOADED HERE MAP');
 
