@@ -61,7 +61,7 @@ console.log('LOADED DATA');
 
 var map = null;
 
-function initHereMap(){
+function initHereMap(){ // This seems like it should be in the application layer
 
 	nokia.Settings.set('app_id', APP_ID);
 	nokia.Settings.set('app_code', APP_CODE);
