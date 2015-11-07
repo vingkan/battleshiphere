@@ -36,7 +36,7 @@ function getLon() {
 // move the map
 function moveMap(map) {
 	map.setCenter({lat: getLat(), lng: getLon()});
-	map.setZoom(10); // zooming is inverted, bigger number = more zoom
+	map.setZoom(15); // zooming is inverted, bigger number = more zoom
 }
 
 function initHereMap() {
@@ -58,7 +58,25 @@ function initHereMap() {
 		zoom: setZoom(11);
 	} */ );
 
-	//Step 3: make the map interactive
+	// Add metaInfo layer to map
+	map.addLayer(defaultLayers.normal.metaInfo);
+	// Store the reference to the metaInfo to TileProvider
+	var tileProvider = defaultLayers.normal.metaInfo.getProvider();
+	// add an event listener to tileProvider - if users click on them
+	tileProvider.addEventListener("tap", function(e) {
+		// Save a reference to the clicked object
+		var spatial = e.target;
+		// output the meta data
+		console.log(spatial.getData());
+	});
+	// Get the MetaInfo service object from the platform
+	var metaInfoService = platform.getMetaInfoService();
+	// Create a tile layer with an empty array (this means all categories are included filtered out categories)
+	var metaInfoLayer = metaInfoService.createTileLayer(/*tile size*/256, /*tile pixel ratio*/1, []);
+	// Add the metaInfo layer to the map
+	map.addLayer(metaInfoLayer);
+
+	// Make the map interactive
 	// MapEvents enables the event system
 	// Behavior implements default interactions for pan/zoom (also on mobile touch environments)
 	var behavior = new H.mapevents.Behavior(new H.mapevents.MapEvents(map));
