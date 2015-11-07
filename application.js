@@ -43,7 +43,15 @@ var platform = new H.service.Platform({
 var defaultLayers = platform.createDefaultLayers();
 
 // Initialized a map - if location not given then it will give a world view
-var map = new H.Map(document.getElementById("map"), defaultLayers.normal.map {
-	center: setCenter()
+var map = new H.Map(document.getElementById("map-container"), defaultLayers.normal.map, {
+	center: new H.geo.Point(0, 51),
 	zoom: 2
 });
+
+
+
+
+
+
+
+
