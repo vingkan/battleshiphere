@@ -6,6 +6,8 @@ var userPosition = {
 	longitude: 0
 };
 
+var map = null; // will be initialze later
+
 // Function that updates user location
 function updatePosition(position) {
 	userPosition.latitude = position.coords.latitude;
@@ -31,11 +33,11 @@ function getLon() {
 	return userPosition.longitude;
 }
 
-function moveMap(map, userPosition) {
-	map.setCenter({lat: userPosition.latitude, lng: userPosition.longitude});
-	map.setZoom(14);
+// move the map
+function moveMap(map) {
+	map.setCenter({lat: getLat(), lng: getLon()});
+	map.setZoom(10); // zooming is inverted, bigger number = more zoom
 }
-
 
 function initHereMap() {
 	// Initialized communication with back-end services
@@ -50,10 +52,11 @@ function initHereMap() {
 	var defaultLayers = platform.createDefaultLayers();
 
 	// Initialized a map - if location not given then it will give a world view
-	var map = new H.Map(document.getElementById("map-container"), defaultLayers.normal.map, {
-		center: new H.geo.Point(0, 51),
-		zoom: 2
-	});
+	var map = new H.Map(document.getElementById("map-container"), defaultLayers.normal.map /*, {
+		remove the quotes to add a default init location
+		center: setCenter({lat: getLat(), lng: getLon()});
+		zoom: setZoom(11);
+	} */ );
 
 	//Step 3: make the map interactive
 	// MapEvents enables the event system
@@ -62,6 +65,8 @@ function initHereMap() {
 
 	// Create the default UI components
 	var ui = H.ui.UI.createDefault(map, defaultLayers);
+
+	moveMap(map)
 }
 
 
