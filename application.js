@@ -14,7 +14,7 @@ function updatePosition(position) {
 
 // Using the navigator class to get a location and update it with update method to userPosition variable
 function getGeolocation(callback) {
-	navigator.getGeolocation.getCurrentPosition(function(position) {
+	navigator.geolocation.getCurrentPosition(function(position) {
 		updatePosition(position);
 		console.log("Called Geolocator");
 		if (callback) {
@@ -31,25 +31,24 @@ function getLon() {
 	return userPosition.longitude;
 }
 
-// Initialized communication with back-end services
-var platform = new H.service.Platform({
-	app_id: "habu7uC2upRacruDrUfu",
-	app_code: "85_CDKXMNkoraKX54-ZS-g",
-	useCIT: true,
-	useHTTPS: true
-});
+function initHereMap() {
+	// Initialized communication with back-end services
+	var platform = new H.service.Platform({
+		app_id: "habu7uC2upRacruDrUfu",
+		app_code: "85_CDKXMNkoraKX54-ZS-g",
+		useCIT: true,
+		useHTTPS: true
+	});
 
-// Obtain the default map type from the platform object
-var defaultLayers = platform.createDefaultLayers();
+	// Obtain the default map type from the platform object
+	var defaultLayers = platform.createDefaultLayers();
 
-// Initialized a map - if location not given then it will give a world view
-var map = new H.Map(document.getElementById("map-container"), defaultLayers.normal.map, {
-	center: new H.geo.Point(0, 51),
-	zoom: 2
-});
-
-
-
+	// Initialized a map - if location not given then it will give a world view
+	var map = new H.Map(document.getElementById("map-container"), defaultLayers.normal.map, {
+		center: new H.geo.Point(0, 51),
+		zoom: 2
+	});
+}
 
 
 
