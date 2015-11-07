@@ -31,6 +31,12 @@ function getLon() {
 	return userPosition.longitude;
 }
 
+function moveMap(map, userPosition) {
+	map.setCenter({lat: userPosition.latitude, lng: userPosition.longitude});
+	map.setZoom(14);
+}
+
+
 function initHereMap() {
 	// Initialized communication with back-end services
 	var platform = new H.service.Platform({
@@ -48,7 +54,27 @@ function initHereMap() {
 		center: new H.geo.Point(0, 51),
 		zoom: 2
 	});
+
+	//Step 3: make the map interactive
+	// MapEvents enables the event system
+	// Behavior implements default interactions for pan/zoom (also on mobile touch environments)
+	var behavior = new H.mapevents.Behavior(new H.mapevents.MapEvents(map));
+
+	// Create the default UI components
+	var ui = H.ui.UI.createDefault(map, defaultLayers);
 }
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
