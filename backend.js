@@ -30,4 +30,4 @@ database.on('child_added', function(update) { // Get an update once the database
 function displayUpdate(name, text) {
 	$("<div/>").text(text).prepend($("<em/>").text(name+": ")).appendTo($("#messageDiv"));
 	$("#messageDiv")[0].scrollTop = $("#messageDiv")[0].scrollHeight;
-}
+};
