@@ -1,3 +1,3 @@
-console.log('LOADED APPLICATION');
 
-// first commit
+
+console.log('LOADED APPLICATION');
