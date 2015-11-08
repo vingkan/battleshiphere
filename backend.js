@@ -249,7 +249,7 @@ function loadQuestions() {
     database.on('child_added', function(update) {
         var questionJSON = update.val();
         newQuestion = new Question({
-            id: generateNewID('question'),
+            id: generateNewID('questions'),
             question: questionJSON['question'],
             answers: "["+questionJSON['correct']+", "+questionJSON['wa1']+", "+questionJSON['wa2']+", "+questionJSON['wa3']+"]"
         });

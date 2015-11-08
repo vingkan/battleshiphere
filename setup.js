@@ -111,7 +111,7 @@ function plantTowerOnMap(coordinates, towerRadius){
 		longitude: coords[1]
 	}*/
 	var tower = new Tower({
-		id: generateNewID('tower'),
+		id: generateNewID('towers'),
 		name: "PRESET",
 		latitude: coordinates.lat,
 		longitude: coordinates.lng,

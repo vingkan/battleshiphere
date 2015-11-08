@@ -12,7 +12,8 @@ function generateRandomName(){
 }
 
 function generateNewID(objectType){
-	var objectCounter = game.get(objectType + 's').length;
+	console.log(objectType);
+	var objectCounter = game.get(objectType).length;
 	var newID = objectType + objectCounter;
 	return newID;
 }
