@@ -4,6 +4,7 @@ var database = new Firebase("https://conquiz.firebaseio.com/");
 // Reference to the google sheets of questions
 var questionsLink = "https://spreadsheets.google.com/feeds/list/1C1POJrIlpm1R3muE0ImmI_ifxpH_aEfPP-QSyl3o2Kg/1/public/basic?alt=json-in-script&callback=JSON_CALLBACK";
 var questions;
+var rows;
 
 $("#upload").click(function() { // If the user clicks on the input with the id="upload"
 	var name = $("#nameInput").val();
@@ -38,9 +39,21 @@ function displayUpdate(name, text) {
 };
 
 
-function displayData(data){
-    var rows = [];
+
+
+// One time push to update the questions on firebase
+function getData() {
+    $.ajax({
+        url:'https://spreadsheets.google.com/feeds/list/1C1POJrIlpm1R3muE0ImmI_ifxpH_aEfPP-QSyl3o2Kg/1/public/basic?alt=json',
+        success: function(data){
+            uploadFirebase(data);
+        }
+    });
+}
+// upload data to firebase
+function uploadFirebase(data){
     var cells = data.feed.entry;
+    rows = [];
     
     for (var i = 0; i < cells.length; i++){
         var rowObj = {};
@@ -52,39 +65,10 @@ function displayData(data){
         }
         rows.push(rowObj);
     }
-    
-    var raw = document.createElement('p');
-    raw.innerText = JSON.stringify(rows);
-    document.body.appendChild(raw);
+    for (var i = 0; i < rows.length; i++) {
+    	database.push({question: rows[i]['timestamp'], correct: rows[i]['correct'], wa1: rows[i]['wa1'], wa2: rows[i]['wa2'], wa3: rows[i]['wa3']});
+    }
 }
 
-$(document).ready(function(){
-    $.ajax({
-        url:'https://spreadsheets.google.com/feeds/list/1C1POJrIlpm1R3muE0ImmI_ifxpH_aEfPP-QSyl3o2Kg/1/public/basic?alt=json',
-        success: function(data){
-            displayData(data);
-        }
-    });
-});
-
-
-// One time push to update the questions on firebase
-function updateDatabase() {
-	$.ajax({
-		url: 'https://spreadsheets.google.com/feeds/list/1C1POJrIlpm1R3muE0ImmI_ifxpH_aEfPP-QSyl3o2Kg/1/public/basic?alt=json',
-		async: false,
-		success: function(data) {
-			console.log("success");
-			questions = data['feed']['entry'];
-			$.each(questions, )
-			console.log(data);
-		},
-		onError: function() {
-			console.log("Error");
-		}
-	});
-}
-
-updateDatabase();
 
 console.log('LOADED BACKEND');
