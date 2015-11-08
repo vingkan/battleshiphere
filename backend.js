@@ -4,6 +4,7 @@ var database = new Firebase("https://conquiz.firebaseio.com/");
 // Reference to the google sheets of questions
 var questionsLink = 'https://spreadsheets.google.com/feeds/list/1C1POJrIlpm1R3muE0ImmI_ifxpH_aEfPP-QSyl3o2Kg/1/public/basic?alt=json';
 var question;
+var questionJSON;
 var rows;
 
 $("#upload").click(function() { // If the user clicks on the input with the id="upload"
