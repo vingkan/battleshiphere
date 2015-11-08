@@ -1,5 +1,6 @@
 function Task(data){
 	this.round = parseFloat(data['round']);
+	this.type = data['player'];
 	this.objectID = data['id'];
 	this.attribute = data['attribute'];
 	this.value = data['value'];
@@ -11,11 +12,9 @@ Task.prototype.toString = function(){
 }
 
 Task.prototype.execute = function(){
-	//TO-DO
+	game.getObjectById(objectID, objectID)
 }
 
 Task.prototype.print = function(){
-	console.log('before')
 	logStack(this);
-	console.log('after')
 }

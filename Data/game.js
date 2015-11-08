@@ -29,7 +29,7 @@ Game.prototype.getObjectById = function(list, id){
 	var response = null;
 	var size = array.length;
 	for(var i = 0; i < size; i++){
-		if(array[i] === id){
+		if(array[i].get('id') === id){
 			response = array[i];
 			break;
 		}
