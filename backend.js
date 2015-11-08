@@ -78,11 +78,13 @@ function loadPlayers() {
 	var newPlayer;
 	playerbase.on('child_added', function(update) {
 		var playerJSON = update.val();
-		newPlayer = new Tower({
-			id: update['id'],
-			team: {icon: playerJSON['team']['icon'], color: playerJSON['team']['color']},
-			coordinate: {latitude: playerJSON['coordinate']['latitude'], longitude: playerJSON['coordinate']['longitude']},
-			troops: update['troops']
+		newPlayer = new Player({
+			id: playerJSON['id'],
+			icon: playerJSON['team']['icon'],
+			color: playerJSON['team']['color'],
+			latitude: playerJSON['coordinate']['latitude'],
+			longitude: playerJSON['coordinate']['longitude'],
+			troops: playerJSON['troops']
 		});
 		playerHolder.push(newPlayer);
 	});
