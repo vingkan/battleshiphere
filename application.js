@@ -75,7 +75,7 @@ function initHereMap() {
 }
 
 function logMap() {
-	console.log(map);
+	console.log(getMap());
 }
 
 /**
