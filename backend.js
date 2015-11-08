@@ -1,9 +1,8 @@
-console.log('LOADED BACKEND');
-
-
 
 // Reference to the root of the Firebase database
 var database = new Firebase("https://battleshiphere.firebaseio.com/");
+// Reference to the google sheets of questions
+var questions = "https://spreadsheets.google.com/feeds/list/1C1POJrIlpm1R3muE0ImmI_ifxpH_aEfPP-QSyl3o2Kg/1/public/basic?alt=json-in-script&callback=JSON_CALLBACK";
 
 
 $("#upload").click(function() { // If the user clicks on the input with the id="upload"
@@ -30,3 +29,6 @@ function displayUpdate(name, text) {
 	$("<div/>").text(text).prepend($("<em/>").text(name+": ")).appendTo($("#messageDiv"));
 	$("#messageDiv")[0].scrollTop = $("#messageDiv")[0].scrollHeight;
 };
+
+
+console.log('LOADED BACKEND');
