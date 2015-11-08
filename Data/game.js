@@ -23,6 +23,10 @@ Game.prototype.set = function(attribute, value){
 	this[attribute] = value;
 }
 
+Game.prototype.push = function(list, object){
+	this[list].push(object);
+}
+
 Game.prototype.getObjectById = function(list, id){
 	var array = this[list];
 	console.log(array);

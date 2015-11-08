@@ -4,7 +4,7 @@ function Task(data){
 	this.objectID = data['id'];
 	this.attribute = data['attribute'];
 	this.value = data['value'];
-	this.execute = false;
+	this.executed = false;
 }
 
 Task.prototype.toString = function(){
@@ -12,7 +12,12 @@ Task.prototype.toString = function(){
 }
 
 Task.prototype.execute = function(){
-	game.getObjectById(objectID, objectID)
+	if(!this.executed && this.round == game.rounds){
+		var object = game.getObjectById(this.type, this.objectID);
+		object.set(attribute, value);
+		this.executed = true;
+		this.print();
+	}
 }
 
 Task.prototype.print = function(){

@@ -24,6 +24,7 @@
 		<textarea id="stack-log"></textarea>
 
 		<script type="text/javascript" src="Data/game.js"></script>
+		<script type="text/javascript" src="Data/player.js"></script>
 		<script type="text/javascript" src="Data/task.js"></script>
 
 		<script type="text/javascript" src="geolocation.js"></script>
@@ -36,7 +37,15 @@
 			name: "Nick"
 		});
 
-		game.players.push('player1');
+		game.push('players', new Player({
+			id: generateNewID('player'),
+			name: generateRandomName(),
+			icon: null,
+			color: null,
+			latitude: 0,
+			longitude: 0,
+			troops: null
+		}));
 
 		function updateUserPosition(){
 			var changeLocationTask = new Task({
@@ -48,7 +57,7 @@
 
 		}
 
-		getGeolocation(updateUserPosition);
+		//getGeolocation(updateUserPosition);
 
 		console.log('LOADED MAIN');
 
