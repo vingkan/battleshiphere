@@ -9,10 +9,10 @@ function initGame(){
 
 function joinGame(){
 	game = getGame();
-	game.questions = loadQuestions();
-	//game.troops = loadTroops();
+	/*game.questions = loadQuestions();
+	game.troops = loadTroops();
 	game.players = loadPlayers();
-	game.towers = loadTowers();
+	game.towers = loadTowers();*/
 }
 
 var mapClickCallback = function(coordinates){
