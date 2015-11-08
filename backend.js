@@ -144,8 +144,8 @@ function loadPlayers() {
 		var playerJSON = update.val();
 		newPlayer = new Player({
 			id: playerJSON['id'],
-			icon: playerJSON['team']['icon'],
-			color: playerJSON['team']['color'],
+			icon: playerJSON['icon'],
+			color: playerJSON[['color'],
 			coordinate: { latitude: playerJSON['latitude'], longitude: playerJSON['longitude']},
 			troops: JSON.stringify(playerJSON['troops'])
 		});
@@ -163,10 +163,11 @@ function uploadPlayerbase(data) {
 		playerbase.push({
 			id: value['id'],
 			name: value['name'],
-			team: {icon: value['icon'], color: value['color']},
+			icon: value['team']['icon'], 
+			color: value['team']['color'],
 			latitude: value['coordinate']['latitude'],
 			longitude: value['coordinate']['longitude'],
-			troops: JSON.Stringify(value['troops'])
+			troops: JSON.stringify(value['troops'])
 		});
 	});
 }
