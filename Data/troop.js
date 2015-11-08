@@ -6,7 +6,7 @@ function Troop(data)
 	this.name = data['name'];
 	this.playerID = data['playerID'];
 	this.towerID = data['towerID'];
-	this.question = JSON.parse(data['question']);
+	this.question = data['question'];
 	this.alive = data['alive'];
 }
 
