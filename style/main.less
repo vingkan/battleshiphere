@@ -2,9 +2,14 @@
 /*---> GLOBALS <------------------------------*/
 /*--------------------------------------------*/
 
-@mainColor: orange;
+
+@gold: #f6a525;
+@maroon: #63000c;
+
+@mainColor: @maroon;
 @mainDark: darken(@mainColor, 10%);
 @mainLight: lighten(@mainColor, 10%);
+
 
 @textSize: 5vh;
 
@@ -48,14 +53,21 @@ div.sidebar{
 }
 
 header{
+
 	width: 100vw;
 	height: 10vh;
 	line-height: 10vh;
-	background: purple;
+	background: @mainColor;
 	position: fixed;
 	top: 0;
 	left: 0;
 	z-index: 15;
+
+	img#logo{
+		height: 8vh;
+		margin: 1vh auto;
+	}
+
 }
 
 footer{
