@@ -16,6 +16,8 @@ function setFocusObject(list, objectID){
 	focusObject = game.getObjectById(list, objectID);
 	mapClickCallback = function(coordinates){
 		plantTowerOnMap(coordinates, focusObject.size);
+		focusObject = null;
+		mapClickCallback = null;
 	}
 }
 
