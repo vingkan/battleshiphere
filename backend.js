@@ -141,14 +141,20 @@ function uploadTowerbase(data) {
 			size: value['size'], 
 			player: value['player'] });
 	});
+	setDefaultTower();
 }
-
-function setTowerKey(){
+function setDefaultTower(){
 	towerbase.once('value', function(snapshot){
 		snapshot.forEach(function(childSnapshot){
-			var childData = childSnapshot.val();
 			var path = new Firebase(towerbase.child(childSnapshot.key()).toString());
-			childData['id'].set(childSnapshot.key());
+			path.set({
+				id: childSnapshot.key(),
+				name: "",
+				latitude: 0,
+				longitude: 0,
+				size: 10,
+				player: ""
+			});
 		});
 	});
 }
