@@ -28,7 +28,7 @@ var someTroop = new Troop({
 	name:"myTroop",
 	playerID: "1",
 	towerID: "1",
-	question: "['Why?', 'What?']",
+	question: "[\'Why?\', \'What?\']",
 	alive: "true"
 	});
 
