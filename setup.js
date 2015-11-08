@@ -22,8 +22,8 @@ function setFocusObject(list, objectID){
 	mapClickCallback = function(coordinates){
 		focusObject.coordinate.latitude = coordinates.lat;
 		focusObject.coordinate.longitude = coordinates.lng;
-		/*focusObject.set('size', focusObject.size)
-		plantTowerOnMap(coordinates, focusObject.size);*/
+			circle = focusObject.getCircle();
+			map.addObject(circle);
 		focusObject.set('placed', true);
 		focusObject = null;
 		mapClickCallback = null;

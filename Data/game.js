@@ -49,23 +49,7 @@ Game.prototype.set = function(attribute, value){
 }
 
 Game.prototype.update = function(){
-	var size = this.towers.length;
-	var circle;
-	var currentTower;
-	//TEXTAREA OUTPUT
-	var list = "towers";
-	var output = document.getElementById('output-' + list);
-	for(var i = 0; i < size; i++){
-		currentTower = this.towers[i];
-		if(currentTower.placed){
-			circle = currentTower.getCircle();
-			map.addObject(circle);
-			//currentTower.update();
-			//TEXTAREA OUTPUT
-			currentTower.value += currentTower + '\n';	
-		}
-	}
-	
+		
 }
 
 Game.prototype.push = function(list, object){
