@@ -50,6 +50,21 @@ Game.prototype.set = function(attribute, value){
 
 Game.prototype.update = function(){
 	//uploadTowerbase(this.towers);
+	var mapObjects = map.getObjects();
+	var size = mapObjects.length;
+	var towerCount = 0;
+	for(var b = 0; b < size; b++){
+		if(mapObjects[b] instanceof H.map.Circle){
+			towerCount++;
+		}
+	}
+	if(towerCount == 7){
+		console.log(':) GAME IS READY!');
+		openGame();
+	}
+	else{
+		console.log(':( Only ' + towerCount + ' towers have been placed.');
+	}
 }
 
 Game.prototype.push = function(list, object){
