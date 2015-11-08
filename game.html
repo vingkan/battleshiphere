@@ -121,8 +121,19 @@
 
 		function trialCallback(){
 			initHereMap();
-			joinGame();
-			game = getGame();
+			game = new Game({
+				id: 'playdemo',
+				name: 'city'
+			});
+			game.towers = loadTowers();
+			var size = game.towers.length;
+			var current;
+			var circle;
+			for(var t = 0; t < size; t++){
+				current = game.towers[t];
+				circle = current.getCircle();
+				map.addObject(circle);
+			}
 		}
 
 		getGeolocation(trialCallback);
