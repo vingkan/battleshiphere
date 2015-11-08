@@ -28,15 +28,15 @@ function getGame() {
 			players: loadPlayers(),
 			//questions: loadQuestions(),
 			questions: [],
-			questionLength: gameJSON['questionLength'],
-			rounds: gameJSON['spawnRate'],
-			spawnRate: gameJSON['spawnRate'],
-			//taskManager: JSON.parse(gameJSON['taskManager']),
+			questionLength: parseFloat(gameJSON['questionLength']),
+			rounds: parseFloat(gameJSON['rounds']),
+			spawnRate: parseFloat(gameJSON['spawnRate']),
+			taskManager: null,
 			towers: loadTowers(),
 			troops: loadTroops()
 		});
 	});
-	console.log(newGame)
+	//console.log(newGame)
 	return newGame;
 }
 
