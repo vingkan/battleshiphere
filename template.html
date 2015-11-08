@@ -46,15 +46,27 @@
 		<div id="messageDiv"></div> -->
 		<!-- This div will be populated by the backend.js -->
 
-		<!-- NATIVE SCRIPTS -->
 		<!-- backend.js tries to find some html element that are not here. -->
 		<!-- <script type="text/javascript" src="backend.js"></script> 
 		<script type="text/javascript" src="data.js"></script> -->
-		<script type="text/javascript" src="application.js"></script>
-		<script type="text/javascript" src="frontend.js"></script>
 
+
+		<!-- NATIVE SCRIPTS -->
+		<!-- Front End -->
+		<script type="text/javascript" src="frontend.js"></script>
+		<!-- Application -->
+		<script type="text/javascript" src="application.js"></script>
+		<!-- Data Layer -->
+		<script type="text/javascript" src="data/game.js"></script>
+		<script type="text/javascript" src="data/task.js"></script>
+		<script type="text/javascript" src="data/player.js"></script>
+		<script type="text/javascript" src="data/question.js"></script>
+		<script type="text/javascript" src="data/tower.js"></script>
+		<script type="text/javascript" src="data/troop.js"></script>
+		<!-- Back End -->
+
+		<!-- Point of entry? -->
 		<script type="text/javascript">
-		
 
 		function callback() {
 			initHereMap();
