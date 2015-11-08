@@ -63,6 +63,7 @@ Game.prototype.loadMyTroops = function(){
 }
 
 function checkGameReadyState(){
+	var ready = false;
 	var mapObjects = map.getObjects();
 	var size = mapObjects.length;
 	var towerCount = 0;
@@ -72,12 +73,16 @@ function checkGameReadyState(){
 		}
 	}
 	if(towerCount == 7){
+		ready = true;
 		console.log(':) GAME IS READY!');
-		openGame();
+		/*toggleMenu('towers');
+		toggleMenu('gameStart');*/
 	}
 	else{
+		ready = false;
 		console.log(':( Only ' + towerCount + ' towers have been placed.');
 	}
+	return ready;
 }
 
 Game.prototype.push = function(list, object){

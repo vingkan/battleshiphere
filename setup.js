@@ -7,6 +7,14 @@ function initGame(){
 	createTowerPresets();
 }
 
+function joinGame(){
+	game = getGame();
+	game.questions = loadQuestions();
+	//game.troops = loadTroops();
+	game.players = loadPlayers();
+	game.towers = loadTowers();
+}
+
 var mapClickCallback = function(coordinates){
 	console.log('no function event set yet');
 };
@@ -30,6 +38,14 @@ function setFocusObject(list, objectID){
 		$('#' + objectID).removeClass('selected');
 		$('#' + objectID).addClass('used');
 		game.update();
+		if(!checkGameReadyState()){
+			openMenu();
+			toggleMenu('towers');
+		}
+		else{
+			openMenu();
+			toggleMenu('gameStart')
+		}
 	}
 }
 
