@@ -38,6 +38,17 @@ function initHereMap(callbackcity){
 		}
 	);
 
+	var icon2 = new H.map.Icon('style/img/dmarker.png');
+	var marker2 = new H.map.Marker(
+		{
+			lat: getUserLat(),
+			lng: getUserLon()
+		},
+		{
+			icon: icon2
+		}
+	);
+
 	var mapEvents = new H.mapevents.MapEvents(map);
 
 	map.addEventListener('tap', function(event){
@@ -54,6 +65,7 @@ function initHereMap(callbackcity){
 	var behavior = new H.mapevents.Behavior(mapEvents);
 
 	map.addObject(marker);
+	map.addObject(marker2);
 	
 	console.log('LOADED HERE MAP');
 

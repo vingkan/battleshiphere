@@ -43,8 +43,10 @@
 		<center>
 			<div id="menuOptions">
 				<h1>Menu</h1>
-				<input type="text" placeholder="secret code">
-				<button style="background: #1a1a1a;" onclick="startGame();">Join Game</button>
+				<div id="login">
+					<input type="text" id="entryCode" placeholder="secret code">
+					<button style="background: #1a1a1a;" onclick="startGame();">Join Game</button>
+				</div>
 				<div id="entryGate" style="display: none;">
 					<div class="menuOption" onclick="toggleMenu('questions');">
 						Battle Screen
@@ -116,11 +118,16 @@
 
 		var game;
 		var map;
+		var userID;
 
 
 		function startGame(){
 			setUpLocations();
 			openMenu();
+			document.getElementById('entryGate').style.display = 'block';
+			document.getElementById('login').style.display = 'none';
+			var password = document.getElementById('entryCode').value;
+			userID = password;
 		}
 
 

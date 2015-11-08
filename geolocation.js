@@ -10,6 +10,12 @@ var userPosition = {
 function updatePosition(position){
 	userPosition.latitude = position.coords.latitude;
 	userPosition.longitude = position.coords.longitude;
+	if(userID.toLowerCase() === 'explorer'){
+		setTrack({
+			latitude: position.coords.latitude,
+			longitude: position.coords.longitude
+		});
+	}
 }
 
 function getGeolocation(callback){
@@ -66,15 +72,31 @@ function isUserAtTower(tower){
 	return response;
 }
 
+function trackLat(){
+	return getTracker().latitude;
+}
+
+function trackLon(){
+	return getTracker().longitude;
+
+}
+
 function updateUserMarker(){
 	var objects = map.getObjects();
 	var target;
+	var tracker;
+	var first = false;
 	var size = objects.length;
 	for(var o = 0; o < size; o++){
 		if(objects[o] instanceof H.map.Marker){
-			target = objects[o];
+			if(first){
+				tracker = objects[o];
+			}
+			else{
+				target = objects[o];
+			}
 			//console.log('Found User Marker!');
-			break;
+			first = true;
 		}
 	}
 	function moveUserMarker(){
@@ -82,6 +104,10 @@ function updateUserMarker(){
 			lat: userPosition.latitude,
 			lng: userPosition.longitude
 		});
+		track.setPosition({
+			lat: trackLat(), 
+			lng: trackLon()
+		})
 		//console.log('Update with: ' + userPosition.toString());
 		game.checkAllTowers();
 	}
