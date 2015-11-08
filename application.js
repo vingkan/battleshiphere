@@ -1,4 +1,7 @@
-console.log('LOADED APPLICATION');
+
+/*--------------------------------------------*/
+/*---> Variables/accessor <------------------*/
+/*--------------------------------------------*/
 
 // Store user's location
 var userPosition = {
@@ -6,9 +9,28 @@ var userPosition = {
 	longitude: 0
 };
 
-var platform = null; // platform will be initialized with a new H map
-var map = null; // will be initialze later
-var defaultLayers = null; // default map type, will be used to store the map obtain from platform
+var platform; // platform will be initialized with a new H map
+var map; // will be initialze later
+var defaultLayers; // default map type, will be used to store the map obtain from platform
+var ui;
+
+// Accessor methods
+function getLat() {
+	return userPosition.latitude;
+}
+function getLon() {
+	return userPosition.longitude;
+}
+function getMap() {
+	return map;
+}
+function getUI() {
+	return ui;
+}
+
+/*--------------------------------------------*/
+/*---> User Location <------------------------*/
+/*--------------------------------------------*/
 
 // Function that updates user location
 function updatePosition(position) {
@@ -27,22 +49,9 @@ function getGeolocation(callback) {
 	});
 }
 
-// Accessor methods
-function getLat() {
-	return userPosition.latitude;
-}
-function getLon() {
-	return userPosition.longitude;
-}
-function getMap() {
-	return map;
-}
-
-// move the map
-function moveMap(map) {
-	map.setCenter({lat: getLat(), lng: getLon()});
-	map.setZoom(15); // zooming is inverted, bigger number = more zoom
-}
+/*--------------------------------------------*/
+/*---> Here Maps Initialization <-------------*/
+/*--------------------------------------------*/
 
 function initHereMap() {
 	// Initialized communication with back-end services
@@ -69,14 +78,22 @@ function initHereMap() {
 	var behavior = new H.mapevents.Behavior(new H.mapevents.MapEvents(map));
 
 	// Create the default UI components
-	var ui = H.ui.UI.createDefault(map, defaultLayers);
+	ui = H.ui.UI.createDefault(map, defaultLayers);
 	// move map to initial location
 	moveMap(map);
 }
 
-function logMap() {
-	console.log(getMap());
+/*--------------------------------------------*/
+/*---> Here API Functions <-------------------*/
+/*--------------------------------------------*/
+
+// move the map
+function moveMap(map) {
+	map.setCenter({lat: getLat(), lng: getLon()});
+	map.setZoom(15); // zooming is inverted, bigger number = more zoom
 }
+
+
 
 /**
  * Creates a new marker and adds it to a group
@@ -91,34 +108,34 @@ function addGroupMapMarker(group, coordinate, html) {
 }
 
 function addInfoBubble(map) {
-  var group = new H.map.Group();
-  if (map == null) {
-  	console.log("map is null");
-  } else if (group == null) {
-  	console.log("group is null")
-  }
+	var group = new H.map.Group();
+	if (map == null) {
+		console.log("map is null");
+	} else if (group == null) {
+	console.log("group is null")
+	}
 
-  map.addObject(group);
+	map.addObject(group);
 
-  // add 'tap' event listener, that opens info bubble, to the group
-  group.addEventListener('tap', function (evt) {
-    // event target is the marker itself, group is a parent event target
-    // for all objects that it contains
-    var bubble =  new H.ui.InfoBubble(evt.target.getPosition(), {
-      // read custom data
-      content: evt.target.getData()
-    });
-    // show info bubble
-    ui.addBubble(bubble);
-  }, false);
-  addMarkerToGroup(group, {lat:41.835591, lng:-87.625787},
-    '<div><a href=\'http://http://web.iit.edu\' >IIT</a>' +
-    '</div><div>McCormick Tribune Campus Center<br>Illinois Institude of Technology</div>');
+	// add 'tap' event listener, that opens info bubble, to the group
+	group.addEventListener('tap', function (evt) {
+	// event target is the marker itself, group is a parent event target
+	// for all objects that it contains
+	var bubble =  new H.ui.InfoBubble(evt.target.getPosition(), {
+	// read custom data
+	content: evt.target.getData()
+	});
+	// show info bubble
+	ui.addBubble(bubble);
+	}, false);
+	addGroupMapMarker(group, {lat:41.835591, lng:-87.625787},
+	'<div><a href=\'https://web.iit.edu\' >Web</a>' +
+	'</div><div>MTCC<br>IIT</div>');
 }
 
 
 
-
+console.log('LOADED APPLICATION');
 
 
 

@@ -54,10 +54,14 @@
 		<script type="text/javascript" src="frontend.js"></script>
 
 		<script type="text/javascript">
+		
 
-		getGeolocation(initHereMap);
-		logMap();
-		//addInfoBubble(getMap());
+		function callback() {
+			initHereMap();
+			addInfoBubble(getMap());
+		}
+		getGeolocation(callback);
+		
 
 		console.log('LOADED MAIN');
 

@@ -1,17 +1,4 @@
 console.log('LOADED BACKEND');
-//Dear source-code readers, pay no attention to these global variables
-//var APP_ID = 'YtKfTS2Zo8ELUk63LzB0';
-//var APP_CODE = 'SB1wcsUEGzLA3SRHJJ7CPw';
-
-// // Initialized communication with back-end services
-// var platform = new H.service.Platform({
-// 	"app_id": "habu7uC2upRacruDrUfu",
-// 	"app_code": "85_CDKXMNkoraKX54-ZS-g"
-// });
-
-
-
-
 
 
 
