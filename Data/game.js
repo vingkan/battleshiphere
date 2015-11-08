@@ -50,6 +50,19 @@ Game.prototype.set = function(attribute, value){
 
 Game.prototype.update = function(){
 	updateTowerbase(this.towers);
+	loadMyTroops();
+	checkGameReadyState();
+}
+
+Game.prototype.loadMyTroops = function(){
+	var size = this.troops.length;
+	var currentTroop;
+	for(var i = 0; i < size; i++){
+		//if(currentTroop.id)
+	}
+}
+
+function checkGameReadyState(){
 	var mapObjects = map.getObjects();
 	var size = mapObjects.length;
 	var towerCount = 0;
