@@ -35,10 +35,9 @@
 
 		<script type="text/javascript">
 
-		var game = new Game({
-			id: 'game0',
-			name: "Sample Game"
-		});
+		var game;
+
+		initGame();
 
 		game.push('players', new Player({
 			id: generateNewID('player'),
@@ -50,7 +49,7 @@
 			troops: null
 		}));
 
-		game.push('towers', new Player({
+		game.push('towers', new Tower({
 			id: generateNewID('tower'),
 			name: generateRandomName(),
 			latitude: 0,

@@ -15,11 +15,9 @@ function generateRandomName(){
 	return nameList[random];
 }
 
-var objectCounter = 0;
-
 function generateNewID(objectType){
+	var objectCounter = game.get(objectType + 's').length;
 	var newID = objectType + objectCounter;
-	objectCounter++;
 	return newID;
 }
 
@@ -42,9 +40,13 @@ function toggleStackLog(view){
 /*---> STORYBOARD <---------------------------*/
 /*--------------------------------------------*/
 
-var game = {
-
+function initGame(){
+	game = new Game({
+		id: 'game0',
+		name: "Sample Game"
+	});
 }
+
 
 function callback() {
 	//initHereMap();
@@ -74,6 +76,12 @@ function getTowerRadius(){
 * Return: void, creates new Tower object and adds it to Game
 */
 function plantTowerOnMap(coordinates){
+	var input = prompt("Enter a pair of comma-separated coordinates for a Tower:");
+	var coords = input.split(",");
+	var coordinates = {
+		latitude: coords[0],
+		longitude: coords[1]
+	}
 	var towerRadius = getTowerRadius();
 	var tower = new Tower({
 		id: getNewId('tower'),
