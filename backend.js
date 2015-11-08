@@ -25,9 +25,9 @@ database.on('child_added', function(update) {
 	var questionJSON = update.val();
 	var question = new Question({
 		id: '1',
-		question: {Question: question['question']},
-		answers: {correct: question['correct'], wa1: question['wa1'], wa2: question['wa2'], wa3: question['wa3']}
-	})
+		question: Question: question['question'],
+		answers: "["+question['correct']+", "+question['wa1']+", "+question['wa2']+", "+question['wa3']+"]"
+	});
 	game.push("question", question);
 });
 
