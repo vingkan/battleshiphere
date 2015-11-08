@@ -77,6 +77,13 @@ Tower.prototype.addTroops = function(troops){
 	// database.push(this);
 }
 
+Tower.prototype.popTroops = function(troops){
+	for (var i = 0; i < troops.length; i++){
+		this.troops.pop(troops[i].id);
+		troops[i].set('towerID', this.id);
+	}
+}
+
 Tower.prototype.getTroopsByPlayer = function(id){
 	var troops = this.troops
 	var out = [];

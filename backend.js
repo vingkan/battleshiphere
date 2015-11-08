@@ -21,16 +21,19 @@ function loadTroops() {
 	var troopHolder = [];
 	var newTroop;
 	troopbase.on('child_added', function(update){
-		var troopJSON = update.val();
-		newTroop = new Troop({
-			id: update['id'],
-			name: update['name'],
-			playerID: update['playerID'],
-			towerID: update['towerID'],
-			question: update['question'],
-			alive: update['alive']
-		});
-		troopHolder.push(newTroop);
+		if (update['Empty'] != "DoNotDelete")) { //Stops the empty from being pulled
+			var troopJSON = update.val();
+			newTroop = new Troop({
+				id: update['id'],
+				name: update['name'],
+				playerID: update['playerID'],
+				towerID: update['towerID'],
+				question: update['question'],
+				alive: update['alive']
+			});
+			troopHolder.push(newTroop);
+		}
+		
 	});
 	return troopHolder;
 }
@@ -47,6 +50,21 @@ function addTroops(data) {
 			towerID: value['towerID'],
 			question: value['question'],
 			alive: value['alive']
+		});
+	});
+}
+
+// This will remove all the troops in the troops folder
+function removeTroops() {
+	troopbase.once('value', function(snapshot) {
+		snapshot.forEach(function(childSnapshot){
+			// You can also get the key and the value of the child in the troopbase folder
+			//var key = childSnapshot.key();
+			//var childData = childSnapshot.val();
+			if (childSnapshot.val()!="DoNotDelete") {
+				var path = new Firebase(troopbase.child(childSnapshot.key()).toString());
+				path.remove();
+			}
 		});
 	});
 }
@@ -82,7 +100,7 @@ function uploadPlayerbase(data) {
 			name: value['name'], 
 			team: {icon: value['icon'], color: value['color']}, 
 			coordinate: {latitude: value['coordinate']['latitude'], longitude: value['coordinate']['longitude']}, 
-			troops: value'troops']
+			troops: value['troops']
 		});
 	});
 }
