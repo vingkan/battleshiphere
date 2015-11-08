@@ -31,6 +31,12 @@ Tower.prototype.toString = function(){
 	return this.id + ': (' + this.getLat().toFixed(3) + ', ' + this.getLon().toFixed(3) + ', ' + this.size + ')'
 }
 
+Tower.prototype.toPresetHTML = function(){
+	var html = '';
+	html += '<div class="tower">' + this.size + '</div>';
+	return html;
+}
+
 var nick = new Tower({
 	id: "1234",
 	name:"Tower",
