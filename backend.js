@@ -1,7 +1,8 @@
 
 // Reference to the root of the Firebase database
 var database = new Firebase("https://conquiz.firebaseio.com/");
-var coordbase = new Firebase("https://towercoord.firebaseio.com/-K2aUIZRYFI5l6Tov1JA");
+var gamebase = new Firebase("https://towercoord.firebaseio.com/");
+var coordbase = gamebase.child("-K2aUIZRYFI5l6Tov1JA");
 var towerbase = coordbase.child("towers");
 var playerbase = coordbase.child("players");
 var troopbase = coordbase.child("troops");
@@ -12,8 +13,35 @@ var question;
 var questionJSON;
 var rows;
 
+/*--------------------------------------------*/
+/*---> Get Game -> Whole game dir <-----------*/
+/*--------------------------------------------*/
+function getGame() {
+	//var gameHolder = []; // for futre updates with multi-lobby
+	var newGame;
+	coordbase.on('child_added', function(update){
+		var gameJSON = update.val();
+		newGame = new Game({
+			id: gameJSON['id'],
+			moode: gameJSON['mode'],
+			name: gameJSON['name'],
+			players: loadPlayers(),
+			questions: loadQuestions(),
+			questionLength: gameJSON['questionLength'],
+			rounds: gameJSON['spawnRate'],
+			spawnRate: gameJSON['spawnRate'],
+			taskManager: (gameJSON['taskManager']).toArray(),
+			towers: loadTowers(),
+			troops: loadTroops()
+		});
+	});
+}
 
-// ToDO: downloading from Firebase should be a return function, to avoid crossing stack
+/*--------------------------------------------*/
+/*---> Download Task from Firebase <----------*/
+/*--------------------------------------------*/
+
+
 /*--------------------------------------------*/
 /*---> Download troops from Firebase <--------*/
 /*--------------------------------------------*/
