@@ -116,3 +116,12 @@ Game.prototype.printAllTowerCoordinates = function(){
 		console.log(this.towers[t].id + ', ' + this.towers[t].getLat() + ', ' + this.towers[t].getLon());
 	}
 }
+
+Game.prototype.checkAllTowers = function(){
+	var size = this.towers.length;
+	for(var t = 0; t < size; t++){
+		if(isUserAtTower(this.towers[t])){
+			alert('You are at Tower: ' + this.towers[t].id + '!');
+		}
+	}
+}
