@@ -1,9 +1,10 @@
 
 // Reference to the root of the Firebase database
 var database = new Firebase("https://conquiz.firebaseio.com/");
-var towerbase = new Firebase("https://towercoord.firebaseio.com/-K2aUIZRYFI5l6Tov1JA/towers");
-var playerbase = new Firebase("https://towercoord.firebaseio.com/-K2aUIZRYFI5l6Tov1JA/players");
-var troopbase = new Firebase("https://towercoord.firebaseio.com/-K2aUIZRYFI5l6Tov1JA/troops");
+var coordbase = new Firebase("https://towercoord.firebaseio.com/-K2aUIZRYFI5l6Tov1JA");
+var towerbase = coordbase.child("towers");
+var playerbase = coordbase.child("players");
+var troopbase = coordbase.child("troops");
 // Reference to the google sheets of questions
 var questionsLink = 'https://spreadsheets.google.com/feeds/list/1C1POJrIlpm1R3muE0ImmI_ifxpH_aEfPP-QSyl3o2Kg/1/public/basic?alt=json';
 
@@ -16,7 +17,23 @@ var rows;
 /*--------------------------------------------*/
 /*---> Download troops from Firebase <--------*/
 /*--------------------------------------------*/
-
+function loadTroops() {
+	var troopHolder = [];
+	var newTroop;
+	troopbase.on('child_added', function(update){
+		var troopJSON = update.val();
+		newTroop = new Troop({
+			id: update['id'],
+			name: update['name'],
+			playerID: update['playerID'],
+			towerID: update['towerID'],
+			question: update['question'],
+			alive: update['alive']
+		});
+		troopHolder.push(newTroop);
+	});
+	return troopHolder;
+}
 
 /*--------------------------------------------*/
 /*---> Upload troops to Firebase <------------*/
