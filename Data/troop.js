@@ -19,10 +19,12 @@ Troop.prototype.set = function(attribute, value){
 }
 
 Troop.prototype.toString = function(){
-	var ret = 'Troop ' + this.name + ' has a id of ' + this.id + ' and playerID of ' + this.playerID + ' and towerID of ' + this.towerID;
+	var ret = 'Troop ' + this.name + ' has a id of ' + this.id + ' and playerID of ' + this.playerID + ' and towerID of ' + this.towerID + ' and is isAlive: ' + this.alive;
 	return ret;
 }
 
+/**
+Example object
 var someTroop = new Troop({
 	id: "1234",
 	name:"myTroop",
@@ -31,5 +33,5 @@ var someTroop = new Troop({
 	question: JSON.stringify("[Why?, What?]"),
 	alive: "true"
 	});
-
+**/
 console.log("troop Loaded");
