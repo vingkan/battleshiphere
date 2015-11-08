@@ -145,8 +145,9 @@ function loadPlayers() {
 		newPlayer = new Player({
 			id: playerJSON['id'],
 			icon: playerJSON['icon'],
-			color: playerJSON[['color'],
-			coordinate: { latitude: playerJSON['latitude'], longitude: playerJSON['longitude']},
+			color: playerJSON['color'],
+			latitude: playerJSON['latitude'], 
+			longitude: playerJSON['longitude'],
 			troops: JSON.stringify(playerJSON['troops'])
 		});
 		playerHolder.push(newPlayer);
@@ -170,6 +171,10 @@ function uploadPlayerbase(data) {
 			troops: JSON.stringify(value['troops'])
 		});
 	});
+}
+function updatePlayerbase(data) {
+
+
 }
 
 
