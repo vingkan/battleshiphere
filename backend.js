@@ -150,6 +150,7 @@ function removeTowerbase() {
 /*---> Download question from Firebase <------*/
 /*--------------------------------------------*/
 function loadQuestions() {
+	var questionHolder = [];
     var newQuestion;
     database.on('child_added', function(update) {
         var questionJSON = update.val();
@@ -159,8 +160,9 @@ function loadQuestions() {
             question: questionJSON['question'],
             answers: "["+questionJSON['correct']+", "+questionJSON['wa1']+", "+questionJSON['wa2']+", "+questionJSON['wa3']+"]"
         });
-        game.push("questions", newQuestion);
+        questionHolder.push(newQuestion);
     });
+    return questionHolder;
 }
 
 
