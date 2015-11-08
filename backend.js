@@ -51,6 +51,17 @@ function addTroops(data) {
 	});
 }
 
+function removeTroops() {
+	troopbase.once('value', function(snapshot) {
+		snapshot.forEach(function(childSnapshot){
+			var key = childSnapshot.key();
+			var childData = childSnapshot.val();
+			console.log(key);
+			console.log(childData);
+		});
+	});
+}
+
 
 /*--------------------------------------------*/
 /*---> Download player from Firebase <--------*/
@@ -82,7 +93,7 @@ function uploadPlayerbase(data) {
 			name: value['name'], 
 			team: {icon: value['icon'], color: value['color']}, 
 			coordinate: {latitude: value['coordinate']['latitude'], longitude: value['coordinate']['longitude']}, 
-			troops: value'troops']
+			troops: value['troops']
 		});
 	});
 }
