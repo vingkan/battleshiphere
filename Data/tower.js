@@ -85,5 +85,16 @@ var nick = new Tower({
 	player: "Nick",
 	troops: "[1, 2, 3, 4]"
 });
+var nick2 = new Tower({
+	id: "41221",
+	name:"Tower2",
+	latitude: "-232",
+	longitude: "0.0",
+	size: "15",
+	player: "Nick2",
+	troops: "[12, 2, 4]"
+});
+
+var obj = [nick, nick2];
 
 console.log("Tower Loaded");

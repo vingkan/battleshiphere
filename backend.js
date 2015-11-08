@@ -1,6 +1,7 @@
 
 // Reference to the root of the Firebase database
 var database = new Firebase("https://conquiz.firebaseio.com/");
+var towerbase = new Firebase("https://towercoord.firebaseio.com/-K2aUIZRYFI5l6Tov1JA/towers");
 // Reference to the google sheets of questions
 var questionsLink = 'https://spreadsheets.google.com/feeds/list/1C1POJrIlpm1R3muE0ImmI_ifxpH_aEfPP-QSyl3o2Kg/1/public/basic?alt=json';
 
@@ -10,7 +11,28 @@ var rows;
 
 
 /*--------------------------------------------*/
-/*---> Download from Firebase <---------------*/
+/*---> Download towers from Firebase <--------*/
+/*--------------------------------------------*/
+
+
+/*--------------------------------------------*/
+/*---> Upload towers to Firebase <------------*/
+/*--------------------------------------------*/
+function uploadTowerbase(data) {
+	console.log(data.length);
+	$.each(data, function(index, value){
+		towerbase.push({id: value['id'], name: value['name'], coordinate: {latitude: value['coordinate']['latitude'], longitude: value['coordinate']['longitude']}, size: value['size'], player: value['player'] });
+	});
+}
+
+function removeTowerbase() {
+	
+}
+
+
+
+/*--------------------------------------------*/
+/*---> Download question from Firebase <------*/
 /*--------------------------------------------*/
 // A function that can be call to get updates from firebase
 function loadQuestions(){
@@ -28,7 +50,7 @@ function loadQuestions(){
 }
 
 /*--------------------------------------------*/
-/*---> Upload to Firebase <-------------------*/
+/*---> Upload question to Firebase <----------*/
 /*--------------------------------------------*/
 
 // ONE TIME push to update the questions on firebase
