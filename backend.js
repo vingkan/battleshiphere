@@ -41,7 +41,7 @@ function loadTroops() {
 /*--------------------------------------------*/
 /*---> Upload troops to Firebase <------------*/
 /*--------------------------------------------*/
-function addTroops(data) {
+function uploadTroops(data) {
 	$.each(data, function(index, value){
 		troopbase.push({
 			id: value['id'],
@@ -82,8 +82,7 @@ function loadPlayers() {
 			id: playerJSON['id'],
 			icon: playerJSON['team']['icon'],
 			color: playerJSON['team']['color'],
-			latitude: playerJSON['coordinate']['latitude'],
-			longitude: playerJSON['coordinate']['longitude'],
+			coordinate: { latitude: playerJSON['latitude'], longitude: playerJSON['longitude']},
 			troops: playerJSON['troops']
 		});
 		playerHolder.push(newPlayer);
@@ -101,8 +100,9 @@ function uploadPlayerbase(data) {
 			id: value['id'], 
 			name: value['name'], 
 			team: {icon: value['icon'], color: value['color']}, 
-			coordinate: {latitude: value['coordinate']['latitude'], longitude: value['coordinate']['longitude']}, 
-			troops: value['troops']
+			latitude: value['coordinate']['latitude'], 
+			longitude: value['coordinate']['longitude'], 
+			troops: JSON.Stringify(value['troops'])
 		});
 	});
 }
@@ -119,7 +119,7 @@ function loadTowers() {
 		newTower = new Tower({
 			id: towerJSON['id'],
 			name: towerJSON['name'],
-			coordinate: {latitude: towerJSON['coordinate']['latitude'], longitude: towerJSON['coordinate']['longitude']},
+			coordinate: {latitude: towerJSON['latitude'], longitude: towerJSON['longitude']},
 			size: towerJSON['size'],
 			player: towerJSON['player']
 		});
@@ -136,8 +136,8 @@ function uploadTowerbase(data) {
 	$.each(data, function(index, value){
 		towerbase.push({id: value['id'], 
 			name: value['name'], 
-			coordinate: {latitude: value['coordinate']['latitude'], 
-			longitude: value['coordinate']['longitude']}, 
+			latitude: value['coordinate']['latitude'], 
+			longitude: value['coordinate']['longitude'], 
 			size: value['size'], 
 			player: value['player'] });
 	});
