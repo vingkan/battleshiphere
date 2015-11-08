@@ -5,10 +5,11 @@
 		<title>ConQuiz</title>
 		<!-- META TAGS for mobile devices -->
 		<meta name="viewport" content="initial-scale=1.0, width=device-width" />
+		<meta http-equiv="Content-Security-Policy" content="default-src * 'unsafe-eval' 'unsafe-inline'; style-src * 'unsafe-inline'; media-src *">
 		<!-- HERE MAPS API -->
-		<script type="text/javascript" src="http://js.api.here.com/v3/3.0/mapsjs-core.js"></script>
-		<script type="text/javascript" src="http://js.api.here.com/v3/3.0/mapsjs-service.js"></script>
-		<script type="text/javascript" src="http://js.api.here.com/v3/3.0/mapsjs-mapevents.js"></script>
+		<script type="text/javascript" src="https://js.api.here.com/v3/3.0/mapsjs-core.js"></script>
+		<script type="text/javascript" src="https://js.api.here.com/v3/3.0/mapsjs-service.js"></script>
+		<script type="text/javascript" src="https://js.api.here.com/v3/3.0/mapsjs-mapevents.js"></script>
 		<!-- STYLESHEETS -->
 		<link rel="stylesheet" type="text/css" href="style/reset.css">
 		<link rel="stylesheet" type="text/css" href="style/main.css">
@@ -46,7 +47,7 @@
 				<div class="wrapper" id="preset-towers"></div>
 			</center>
 		</div>
-		
+
 		<div id="map-container"></div>
 
 	<div style="display:none">
@@ -90,7 +91,7 @@
 		var game;
 		var map;
 
-		
+
 
 		function trialCallback(){
 			initHereMap();
