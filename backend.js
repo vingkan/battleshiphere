@@ -179,7 +179,7 @@ function loadTowers() {
 	var newTower;
 	towerbase.on('child_added', function(update) {
 		var towerJSON = update.val();
-		console.log(towerJSON);
+		//console.log(towerJSON);
 		newTower = new Tower({
 			id: towerJSON['id'],
 			name: towerJSON['name'],
