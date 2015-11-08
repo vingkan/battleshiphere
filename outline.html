@@ -67,16 +67,18 @@
 		var game;
 		var map;
 
-		initGame();
+		
 
 		function trialCallback(){
+			initGame();
 			initHereMap();
-			var circle = new H.map.Circle({
+			/*var circle = new H.map.Circle({
 				lat: getUserLat(),
 				lng: getUserLon()
 			}, 5);
 
-			map.addObject(circle);
+			map.addObject(circle);*/
+
 		}
 
 		getGeolocation(trialCallback);

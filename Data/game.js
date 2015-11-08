@@ -42,6 +42,16 @@ Game.prototype.set = function(attribute, value){
 	this[attribute] = value;
 }
 
+Game.prototype.update = function(){
+	var size = this.towers.length;
+	var circle;
+	for(var i = 0; i < size; i++){
+		circle = this.towers[i].getCircle()
+		map.addObject(circle);
+		console.log(this.towers[i])
+	}	
+}
+
 Game.prototype.push = function(list, object){
 	this[list].push(object);
 	var output = document.getElementById('output-' + list);

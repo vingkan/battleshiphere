@@ -22,6 +22,7 @@ function setFocusObject(list, objectID){
 		mapClickCallback = null;
 		$('#' + objectID).removeClass('selected');
 		$('#' + objectID).addClass('used');
+		game.update();
 	}
 }
 

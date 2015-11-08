@@ -37,6 +37,15 @@ Tower.prototype.toPresetHTML = function(){
 	return html;
 }
 
+Tower.prototype.getCircle = function(){
+	var circle = new H.map.Circle({
+		lat: this.getLat(),
+		lng: this.getLon()
+	}, this.size);
+	console.log(this.getLat() + " " + this.getLon())
+	return circle;
+}
+
 var nick = new Tower({
 	id: "1234",
 	name:"Tower",
