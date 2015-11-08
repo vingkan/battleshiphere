@@ -35,6 +35,7 @@ function getGame() {
 			troops: loadTroops()
 		});
 	});
+	console.log(newGame)
 	return newGame;
 }
 
