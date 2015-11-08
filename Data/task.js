@@ -1,3 +1,18 @@
+function logStack(task){
+	var stackLog = document.getElementById('stack-log');
+	stackLog.value += task + "\n";
+}
+
+function toggleStackLog(view){
+	var stackLog = document.getElementById('stack-log');
+	if(view){
+		stackLog.style.display = 'block';
+	}
+	else{
+		stackLog.style.display = 'none';
+	}
+}
+
 function Task(data){
 	this.round = parseFloat(data['round']);
 	this.type = data['player'];
