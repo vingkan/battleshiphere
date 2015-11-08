@@ -1,151 +1,138 @@
-console.log('LOADED APPLICATION');
 
-// I am trying to fetch the user's ship, but unsure how to
-// mainly unsure as to what is availible at my discretion
-/*
-function searchNearby(Ship shipObj)
-{
-	// assuming these variables are public
-	Ship tempship = new Ship(shipObj.name, shipObj.player, shipObj.coordinates);
-	// a temporary ship object
-	Ship[] nearbyShips = null;
-	
-	for(int i = 0; i < 10; i++)
-	{
-		tempShip.setLongtitude(shipObj.longitude + i);
-		if(tempShip.coordinates = )
-	}
-	
+/*--------------------------------------------*/
+/*---> Variables/accessor <------------------*/
+/*--------------------------------------------*/
+
+// Store user's location
+var userPosition = {
+	latitude: 0,
+	longitude: 0
+};
+
+var platform; // platform will be initialized with a new H map
+var map; // will be initialze later
+var defaultLayers; // default map type, will be used to store the map obtain from platform
+var ui;
+
+// Accessor methods
+function getLat() {
+	return userPosition.latitude;
 }
-*/
+function getLon() {
+	return userPosition.longitude;
+}
+function getMap() {
+	return map;
+}
+function getUI() {
+	return ui;
+}
 
+/*--------------------------------------------*/
+/*---> User Location <------------------------*/
+/*--------------------------------------------*/
 
-// READ BELOW
+// Function that updates user location
+function updatePosition(position) {
+	userPosition.latitude = position.coords.latitude;
+	userPosition.longitude = position.coords.longitude;
+}
 
-// in Java, I would write it this way
-// Some object "Coordinates" with attributes longtitude and latitude
-// Some object "Ship" with attributes name, player, and Coordinates (object)
-// this was written very quickly, so please excuse any logic errors and syntax shortcuts
-
-/*
-
-	class Coordinates
-	{
-		// we could make these private if needed
-		public double latitude;
-		public double longitude;
-		
-		Coordinates(double longitude, double latitude)
-		{
-			this.latitude = latitude;
-			this.longitude = longitude;
+// Using the navigator class to get a location and update it with update method to userPosition variable
+function getGeolocation(callback) {
+	navigator.geolocation.getCurrentPosition(function(position) {
+		updatePosition(position);
+		console.log("Called Geolocator");
+		if (callback) {
+			callback();
 		}
+	});
+}
+
+/*--------------------------------------------*/
+/*---> Here Maps Initialization <-------------*/
+/*--------------------------------------------*/
+
+function initHereMap() {
+	// Initialized communication with back-end services
+	platform = new H.service.Platform({
+		app_id: "habu7uC2upRacruDrUfu",
+		app_code: "85_CDKXMNkoraKX54-ZS-g",
+		useCIT: true,
+		useHTTPS: true
+	});
+
+	// Obtain the default map type from the platform object
+	defaultLayers = platform.createDefaultLayers();
+
+	// Initialized a map - if location not given then it will give a world view
+	map = new H.Map(document.getElementById("map-container"), defaultLayers.normal.map /*, {
+		remove the quotes to add a default init location
+		center: setCenter({lat: getLat(), lng: getLon()});
+		zoom: setZoom(11);
+	} */ );
+
+	// Make the map interactive
+	// MapEvents enables the event system
+	// Behavior implements default interactions for pan/zoom (also on mobile touch environments)
+	var behavior = new H.mapevents.Behavior(new H.mapevents.MapEvents(map));
+
+	// Create the default UI components
+	ui = H.ui.UI.createDefault(map, defaultLayers);
+	// move map to initial location
+	moveMap(map);
+}
+
+/*--------------------------------------------*/
+/*---> Here API Functions <-------------------*/
+/*--------------------------------------------*/
+
+// move the map
+function moveMap(map) {
+	map.setCenter({lat: getLat(), lng: getLon()});
+	map.setZoom(15); // zooming is inverted, bigger number = more zoom
+}
+
+
+
+/**
+ * Creates a new marker and adds it to a group
+ * @param {H.map.Group} group       The group holding the new marker
+ * @param {H.geo.Point} coordinate  The location of the marker
+ * @param {String} html             Data associated with the marker
+ */
+function addGroupMapMarker(group, coordinate, html) {
+	var marker = new H.map.Marker(coordinate);
+	marker.setData(html);
+	group.addObject(marker);
+}
+
+function addInfoBubble(map) {
+	var group = new H.map.Group();
+	if (map == null) {
+		console.log("map is null");
+	} else if (group == null) {
+	console.log("group is null")
 	}
 
+	map.addObject(group);
 
-	class Ship
-	{
-		String name;
-		String player;
-		Coordinates coords;
-		
-		public Ship(String name, String player, double x, double y)
-		{
-			this.name = name;
-			this.player = player;
-			coords = new Coordinates(x, y);
-		}
-		
-		double getLongitude()
-		{
-			return coords.longitude;
-		}
-		
-		double getLatitude()
-		{
-			return coords.latitude;
-		}
-		
-		}
-		
-		
-		.. set methods
-	}
-	
-	class GameBoard
-	{
-		final int HEIGHT = 100;
-		final int WIDTH = 300;
-		
-		ArrayList<Ship> fullBoard = new ArrayList<Ship>();
-		
-		void add(String player, String name, int x, int y)
-		{
-			Ship sh = new Ship(...);
-			fullBoard.add(sh);
-		}
-		
-		
-		
-		boolean searchNearby(Ship sh)
-		{
-			Ship temp = new Ship(sh.name, sh.player, sh.x, sh.y);
-			
-			// some really really shorthand code FOR ONE CRITERIA
-			// if our definition of nearby was a y value of 10 above exactly, we could obviously change that
-			temp.coords.latitude = temp.coords.latitude + 10;
-			Coordinates co = new Coordinates(x, y);
-			for(Ship shp : fullBoard)
-				if(temp.coords == shp.coords)
-				{
-					return true;
-				}
-				else
-				{
-					return null;
-				}
-	}
-	..
-	import ...
-	class Client
-	{
-		// A simple console style setup
-		
-		Scanner in = new Scanner(System.in);
-		
-		System.out.print("player name: ");
-		String pName = in.next();
-		
-		System.out.print("Ship name: ");
-		String sName = in.next();
-		
-		... ask for coords ...
-		double xCord
-		double yCord
-		
-		Ship pop = new Ship(pName, sName, xCord, yCord);
-		
-		GameBoard gb = new GameBoard();
-		
-		// in theory, there would be more ships already on the board
-		
-		gb.add(pop);
-		
-		System.out.print("Would you like to search nearby?");
-		String val = in.next();
-		
-		if(val.equals("yes"))
-		{
-			boolean wax = gb.searchnearby(pop);
-			System.out.println(wax);
-		}
-		else
-		{
-			System.out.println("we won't search!")
-		}
-		
-		
-		
-		
-	}
-*/
+	// add 'tap' event listener, that opens info bubble, to the group
+	group.addEventListener('tap', function (evt) {
+	// event target is the marker itself, group is a parent event target
+	// for all objects that it contains
+	var bubble =  new H.ui.InfoBubble(evt.target.getPosition(), {
+	// read custom data
+	content: evt.target.getData()
+	});
+	// show info bubble
+	ui.addBubble(bubble);
+	}, false);
+	addGroupMapMarker(group, {lat:41.835591, lng:-87.625787},
+	'<div><a href=\'https://web.iit.edu\' >Web</a>' +
+	'</div><div>MTCC<br>IIT</div>');
+}
+
+
+
+console.log('LOADED APPLICATION');

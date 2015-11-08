@@ -1,7 +1,6 @@
 console.log('LOADED BACKEND');
-//Dear source-code readers, pay no attention to these global variables
-var APP_ID = 'YtKfTS2Zo8ELUk63LzB0';
-var APP_CODE = 'SB1wcsUEGzLA3SRHJJ7CPw';
+
+
 
 // Reference to the root of the Firebase database
 var database = new Firebase("https://battleshiphere.firebaseio.com/");
@@ -21,7 +20,7 @@ $("#upload").click(function() { // If the user clicks on the input with the id="
 	}
 });
 
-database.on('child_added', function(update) { // Get an update once the database has new data
+database.on("child_added", function(update) { // Get an update once the database has new data
 			console.log("Callback function: New data has been added to the database");
 			var message = update.val();
 			displayUpdate(message.name, message.text);

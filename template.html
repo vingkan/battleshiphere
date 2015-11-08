@@ -3,14 +3,16 @@
 <html>
 	<head>
 		<title>HERE Battleship</title>
-		<!-- META TAGS -->
+		<!-- META TAGS for mobile devices -->
 		<meta name="viewport" content="initial-scale=1.0, width=device-width" />
 		<!-- HERE MAPS API -->
-		<!--<script type="text/javascript" src="http://js.api.here.com/v3/3.0/mapsjs-core.js"></script>
-		<script type="text/javascript" src="http://js.api.here.com/v3/3.0/mapsjs-service.js"></script>
-		<script type="text/javascript" src="http://js.api.here.com/v3/3.0/mapsjs-ui.js"></script>
-		<link rel="stylesheet" type="text/css" href="http://js.api.here.com/v3/3.0/mapsjs-ui.css">-->
-		<script src="http://js.api.here.com/se/2.5.4/jsl.js" type="text/javascript" charset="utf-8"></script>
+		<link rel="stylesheet" type="text/css" href="https://js.api.here.com/v3/3.0/mapsjs-ui.css" />
+  		<script type="text/javascript" charset="UTF-8" src="https://js.api.here.com/v3/3.0/mapsjs-core.js"></script>
+  		<script type="text/javascript" charset="UTF-8" src="https://js.api.here.com/v3/3.0/mapsjs-service.js"></script>
+  		<script type="text/javascript" charset="UTF-8" src="https://js.api.here.com/v3/3.0/mapsjs-ui.js"></script>
+  		<script type="text/javascript" charset="UTF-8" src="https://js.api.here.com/v3/3.0/mapsjs-mapevents.js"></script>
+  		<!-- Don't know what this import is -->
+		<!-- <script src="http://js.api.here.com/se/2.5.4/jsl.js" type="text/javascript" charset="utf-8"></script> -->
 		<!-- STYLESHEETS -->
 		<link rel="stylesheet" type="text/css" href="style/reset.css">
 		<link rel="stylesheet" type="text/css" href="style/main.css">
@@ -30,27 +32,36 @@
 	</head>
 	<body>
 
-		Hello World!
+		<p>Hello World!</p>
 
+		<input type="text" id="searchBox" placeholder="Address">
+		<input type="button" id="confirmSearch" value="Search">
 		<div id="map-container"></div>
 
-		
+		<!-- Backend stuff
 		<input type="text" id="nameInput" placeholder="Name">
 		<input type="text" id="messageInput" placeholder="Message">
 		<input type="button" id="upload" value="Submit"> 
 		<br>
-		<div id="messageDiv"></div> <!-- This div will be populated by the backend.js -->
+		<div id="messageDiv"></div> -->
+		<!-- This div will be populated by the backend.js -->
 
 		<!-- NATIVE SCRIPTS -->
 		<!-- backend.js tries to find some html element that are not here. -->
-		<script type="text/javascript" src="backend.js"></script> 
-		<script type="text/javascript" src="data.js"></script>
+		<!-- <script type="text/javascript" src="backend.js"></script> 
+		<script type="text/javascript" src="data.js"></script> -->
 		<script type="text/javascript" src="application.js"></script>
 		<script type="text/javascript" src="frontend.js"></script>
 
 		<script type="text/javascript">
+		
 
-		getGeolocation(initHereMap);
+		function callback() {
+			initHereMap();
+			addInfoBubble(getMap());
+		}
+		getGeolocation(callback);
+		
 
 		console.log('LOADED MAIN');
 
