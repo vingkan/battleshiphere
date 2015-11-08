@@ -15,6 +15,10 @@ Tower.prototype.get = function(attribute) {
 	return this[attribute];
 }
 
+Tower.prototype.set = function(attribute, value) {
+	this[attribute] = value;
+}
+
 var nick = new Tower({
 	id: "1234",
 	name:"Tower",

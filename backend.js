@@ -1,9 +1,9 @@
 
 // Reference to the root of the Firebase database
-var database = new Firebase("https://battleshiphere.firebaseio.com/");
+var database = new Firebase("https://conquiz.firebaseio.com/");
 // Reference to the google sheets of questions
-var questions = "https://spreadsheets.google.com/feeds/list/1C1POJrIlpm1R3muE0ImmI_ifxpH_aEfPP-QSyl3o2Kg/1/public/basic?alt=json-in-script&callback=JSON_CALLBACK";
-
+var questionsLink = "https://spreadsheets.google.com/feeds/list/1C1POJrIlpm1R3muE0ImmI_ifxpH_aEfPP-QSyl3o2Kg/1/public/basic?alt=json-in-script&callback=JSON_CALLBACK";
+var questions;
 
 $("#upload").click(function() { // If the user clicks on the input with the id="upload"
 	var name = $("#nameInput").val();
@@ -19,11 +19,18 @@ $("#upload").click(function() { // If the user clicks on the input with the id="
 	}
 });
 
-database.on("child_added", function(update) { // Get an update once the database has new data
-			console.log("Callback function: New data has been added to the database");
-			var message = update.val();
-			displayUpdate(message.name, message.text);
+// Get an update once the database has new data
+database.on('child_added', function(update) {
+	questions = update.val();
+	
+	console.log("Successfully retrieve questions from database.");
 });
+
+// database.on("child_added", function(update) { // Get an update once the database has new data
+// 			console.log("Callback function: New data has been added to the database");
+// 			var message = update.val();
+// 			displayUpdate(message.name, message.text);
+// });
 
 function displayUpdate(name, text) {
 	$("<div/>").text(text).prepend($("<em/>").text(name+": ")).appendTo($("#messageDiv"));
