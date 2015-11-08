@@ -6,7 +6,9 @@ var userPosition = {
 	longitude: 0
 };
 
+var platform = null; // platform will be initialized with a new H map
 var map = null; // will be initialze later
+var defaultLayers = null; // default map type, will be used to store the map obtain from platform
 
 // Function that updates user location
 function updatePosition(position) {
@@ -32,6 +34,9 @@ function getLat() {
 function getLon() {
 	return userPosition.longitude;
 }
+function getMap() {
+	return map;
+}
 
 // move the map
 function moveMap(map) {
@@ -41,7 +46,7 @@ function moveMap(map) {
 
 function initHereMap() {
 	// Initialized communication with back-end services
-	var platform = new H.service.Platform({
+	platform = new H.service.Platform({
 		app_id: "habu7uC2upRacruDrUfu",
 		app_code: "85_CDKXMNkoraKX54-ZS-g",
 		useCIT: true,
@@ -49,32 +54,14 @@ function initHereMap() {
 	});
 
 	// Obtain the default map type from the platform object
-	var defaultLayers = platform.createDefaultLayers();
+	defaultLayers = platform.createDefaultLayers();
 
 	// Initialized a map - if location not given then it will give a world view
-	var map = new H.Map(document.getElementById("map-container"), defaultLayers.normal.map /*, {
+	map = new H.Map(document.getElementById("map-container"), defaultLayers.normal.map /*, {
 		remove the quotes to add a default init location
 		center: setCenter({lat: getLat(), lng: getLon()});
 		zoom: setZoom(11);
 	} */ );
-
-	// Add metaInfo layer to map
-	map.addLayer(defaultLayers.normal.metaInfo);
-	// Store the reference to the metaInfo to TileProvider
-	var tileProvider = defaultLayers.normal.metaInfo.getProvider();
-	// add an event listener to tileProvider - if users click on them
-	tileProvider.addEventListener("tap", function(e) {
-		// Save a reference to the clicked object
-		var spatial = e.target;
-		// output the meta data
-		console.log(spatial.getData());
-	});
-	// Get the MetaInfo service object from the platform
-	var metaInfoService = platform.getMetaInfoService();
-	// Create a tile layer with an empty array (this means all categories are included filtered out categories)
-	var metaInfoLayer = metaInfoService.createTileLayer(/*tile size*/256, /*tile pixel ratio*/1, []);
-	// Add the metaInfo layer to the map
-	map.addLayer(metaInfoLayer);
 
 	// Make the map interactive
 	// MapEvents enables the event system
@@ -83,10 +70,51 @@ function initHereMap() {
 
 	// Create the default UI components
 	var ui = H.ui.UI.createDefault(map, defaultLayers);
-
-	moveMap(map)
+	// move map to initial location
+	moveMap(map);
 }
 
+function logMap() {
+	console.log(map);
+}
+
+/**
+ * Creates a new marker and adds it to a group
+ * @param {H.map.Group} group       The group holding the new marker
+ * @param {H.geo.Point} coordinate  The location of the marker
+ * @param {String} html             Data associated with the marker
+ */
+function addGroupMapMarker(group, coordinate, html) {
+	var marker = new H.map.Marker(coordinate);
+	marker.setData(html);
+	group.addObject(marker);
+}
+
+function addInfoBubble(map) {
+  var group = new H.map.Group();
+  if (map == null) {
+  	console.log("map is null");
+  } else if (group == null) {
+  	console.log("group is null")
+  }
+
+  map.addObject(group);
+
+  // add 'tap' event listener, that opens info bubble, to the group
+  group.addEventListener('tap', function (evt) {
+    // event target is the marker itself, group is a parent event target
+    // for all objects that it contains
+    var bubble =  new H.ui.InfoBubble(evt.target.getPosition(), {
+      // read custom data
+      content: evt.target.getData()
+    });
+    // show info bubble
+    ui.addBubble(bubble);
+  }, false);
+  addMarkerToGroup(group, {lat:41.835591, lng:-87.625787},
+    '<div><a href=\'http://http://web.iit.edu\' >IIT</a>' +
+    '</div><div>McCormick Tribune Campus Center<br>Illinois Institude of Technology</div>');
+}
 
 
 
