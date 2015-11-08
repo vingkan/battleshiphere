@@ -20,11 +20,11 @@ $("#upload").click(function() { // If the user clicks on the input with the id="
 });
 
 // Get an update once the database has new data
-database.on('child_added', function(update) {
-	questions = update.val();
+// database.on('child_added', function(update) {
+// 	questions = update.val();
 	
-	console.log("Successfully retrieve questions from database.");
-});
+// 	console.log("Successfully retrieve questions from database.");
+// });
 
 // database.on("child_added", function(update) { // Get an update once the database has new data
 // 			console.log("Callback function: New data has been added to the database");
@@ -36,6 +36,27 @@ function displayUpdate(name, text) {
 	$("<div/>").text(text).prepend($("<em/>").text(name+": ")).appendTo($("#messageDiv"));
 	$("#messageDiv")[0].scrollTop = $("#messageDiv")[0].scrollHeight;
 };
+
+
+// One time push to update the questions on firebase
+function updateDatabase() {
+	$.ajax({
+		url: 'https://spreadsheets.google.com/feeds/list/1C1POJrIlpm1R3muE0ImmI_ifxpH_aEfPP-QSyl3o2Kg/1/public/basic?alt=json-in-script&callback=JSON_CALLBACK',
+		success: function(data) {
+			console.log("success");
+			questions = data;
+			console.log(data);
+		},
+		onError: function() {
+			console.log("Error");
+		}
+	});
+	// $.getJSON('https://spreadsheets.google.com/feeds/list/1C1POJrIlpm1R3muE0ImmI_ifxpH_aEfPP-QSyl3o2Kg/1/public/basic?alt=json-in-script&callback=JSON_CALLBACK', function(data) {
+	// 	questions = data;
+	// });
+}
+
+updateDatabase();
 
 
 console.log('LOADED BACKEND');
