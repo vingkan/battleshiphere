@@ -47,6 +47,10 @@ function initGame(){
 	});
 }
 
+function mapClickCallback(coordinates){
+	alert(coordinates);
+}
+
 function initHereMap(){
 
 	/*var platform = new H.service.Platform({
@@ -87,6 +91,7 @@ function initHereMap(){
 		var yPort = event.currentPointer.viewportY;
 		//Map.screenToGeo() is a godsend
 		var geo = event.target.screenToGeo(xPort, yPort);
+		mapClickCallback(geo);
 		/*console.log(geo);*/
 	});
 
