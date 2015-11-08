@@ -3,6 +3,7 @@ function initGame(){
 		id: 'game0',
 		name: "Sample Game"
 	});
+	loadQuestions();
 	createTowerPresets();
 }
 

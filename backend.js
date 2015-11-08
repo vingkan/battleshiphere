@@ -20,16 +20,19 @@ $("#upload").click(function() { // If the user clicks on the input with the id="
 	}
 });
 
-database.on('child_added', function(update) {
-	question = {};
-	var questionJSON = update.val();
-	var question = new Question({
-		id: '1',
-		question: Question: question['question'],
-		answers: "["+question['correct']+", "+question['wa1']+", "+question['wa2']+", "+question['wa3']+"]"
-	});
-	game.push("question", question);
-});
+function loadQuestions(){
+    var newQuestion;
+    database.on('child_added', function(update) {
+        var questionJSON = update.val();
+        console.log(questionJSON)
+        newQuestion = new Question({
+            id: generateNewID('question'),
+            question: questionJSON['question'],
+            answers: "["+questionJSON['correct']+", "+questionJSON['wa1']+", "+questionJSON['wa2']+", "+questionJSON['wa3']+"]"
+        });
+        game.push("questions", newQuestion);
+    });
+}
 
 // Get an update once the database has new data
 // database.on('child_added', function(update) {
