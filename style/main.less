@@ -22,7 +22,7 @@
 /*--------------------------------------------*/
 
 html{
-	background: #dddddd;
+	background: @mainLight;
 	overflow-x: hidden;
 	font-family: @bodyFont;
 }
@@ -110,6 +110,7 @@ h1, h2, h3, h4, h5, h6, p, ul, li, input, select, button{
 
 h1, h2, h3, h4, h5, h6{
 	font-family: @headFont;
+	color: white;
 }
 
 h1{
@@ -142,13 +143,14 @@ button, input, textarea, select{
 div#preset-towers{
 
 	div.tower{
-		background: white;
+		background: url('img/whiteTower.png');
+		background-size: 100%;
 		display: inline-block;
 		width: 30vw;
-		margin: 5vw;
+		margin: 1vh 5vw;
 		height: 30vw;
 		line-height: 30vw;
-		border-radius: 50%;
+		font-family: @headFont;
 		text-align: center;
 		font-size: 10vw;
 	}

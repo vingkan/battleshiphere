@@ -38,10 +38,20 @@ Tower.prototype.toPresetHTML = function(){
 }
 
 Tower.prototype.getCircle = function(){
-	var circle = new H.map.Circle({
+	var customStyle ={
+		strokeColor: 'rgba(99, 0, 12, 0.50)'
+		fillColor: 'rgba(99, 0, 12, 0.25)'
+	}
+	var circle = new H.map.Circle(
+	{
 		lat: this.getLat(),
 		lng: this.getLon()
-	}, this.size);
+	},
+	this.size,
+	{
+		style: customStyle
+	}
+	);
 	console.log("Circle Center: " + this.getLat() + ", " + this.getLon())
 	return circle;
 }
