@@ -19,6 +19,18 @@ Tower.prototype.set = function(attribute, value) {
 	this[attribute] = value;
 }
 
+Tower.prototype.getLat = function(){
+	return this.coordinate.latitude;
+}
+
+Tower.prototype.getLon = function(){
+	return this.coordinate.longitude;
+}
+
+Tower.prototype.toString = function(){
+	return this.id + ': (' + this.getLat().toFixed(3) + ', ' + this.getLon().toFixed(3) + ', ' + this.size + ')'
+}
+
 var nick = new Tower({
 	id: "1234",
 	name:"Tower",
@@ -27,6 +39,6 @@ var nick = new Tower({
 	size: "5",
 	player: "Nick",
 	troops: "[1, 2, 3, 4]"
-	});
+});
 
 console.log("Tower Loaded");

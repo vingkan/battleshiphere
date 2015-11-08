@@ -41,15 +41,13 @@ function plantTowerOnMap(coordinates){
 	}*/
 	var towerRadius = getTowerRadius();
 	var tower = new Tower({
-		id: getNewId('tower'),
+		id: generateNewID('tower'),
 		name: generateRandomName(),
-		coordinates: {
-			latitude: coordinates.latitude,
-			longitude: coordinates.longitude
-		},
+		latitude: coordinates.lat,
+		longitude: coordinates.lng,
 		size: towerRadius,
 		player: null,
-		troops: []
+		troops: null
 	});
 	game.push('towers', tower);
 }

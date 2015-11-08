@@ -2,24 +2,6 @@
 /*---> UTILITIES <----------------------------*/
 /*--------------------------------------------*/
 
-var nameList = [
-	"Nick",
-	"Vinesh",
-	"Mohsin"
-];
-
-function generateRandomName(){
-	var max = nameList.length;
-	var min = 0;
-	var random = Math.floor(Math.random() * (max - min)) + min;
-	return nameList[random];
-}
-
-function generateNewID(objectType){
-	var objectCounter = game.get(objectType + 's').length;
-	var newID = objectType + objectCounter;
-	return newID;
-}
 
 /*--------------------------------------------*/
 /*---> STORYBOARD <---------------------------*/
