@@ -39,7 +39,7 @@ Tower.prototype.toPresetHTML = function(){
 
 Tower.prototype.getCircle = function(){
 	var customStyle ={
-		strokeColor: 'rgba(99, 0, 12, 0.50)'
+		strokeColor: 'rgba(99, 0, 12, 0.50)',
 		fillColor: 'rgba(99, 0, 12, 0.25)'
 	}
 	var circle = new H.map.Circle(

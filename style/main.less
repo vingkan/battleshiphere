@@ -49,6 +49,14 @@ div.sidebar{
 		left: -80vw;
 	}
 
+	p{
+		width: 70vw;
+		margin: 5vw;
+		color: white;
+		line-height: 0.75 * @textSize;
+		text-align: center;
+	}
+
 	.AnimateAll();
 
 }
@@ -67,7 +75,22 @@ header{
 	img#logo{
 		height: 8vh;
 		margin: 1vh auto;
+		.AnimateAll();
 	}
+
+	&:hover{
+		
+		background: @mainDark;
+		height: 16vh;
+
+		img#logo{
+			margin: 2vh auto;
+			height: 12vh;
+		}
+
+	}
+
+	.AnimateAll();
 
 }
 
@@ -75,18 +98,21 @@ footer{
 
 	width: 100vh;
 	height: 10vh;
-	background: orange;
+	background: @mainColor;
 	position: fixed;
 	bottom: 0;
 	left: 0;
 	z-index: 25;
 
 	textarea{
-		width: 100vw;
+		margin: 0 auto;
+		width: 90vw;
+		max-width: 90vw;
+		padding: 0vw 3vw;
 		height: 10vh;
 		line-height: 5vh;
 		left: 0;
-		background: @gold;
+		background: transparent;
 		color: white;
 		font-family: @bodyFont;
 		font-size: 3vh;
@@ -111,6 +137,7 @@ h1, h2, h3, h4, h5, h6, p, ul, li, input, select, button{
 h1, h2, h3, h4, h5, h6{
 	font-family: @headFont;
 	color: white;
+	margin: 1vh auto;
 }
 
 h1{
@@ -124,6 +151,10 @@ h2{
 
 h3{
 	font-size: 1.15 * @textSize;
+}
+
+p{
+	font-size: 0.5 * @textSize;
 }
 
 /*--------------------------------------------*/
@@ -157,18 +188,21 @@ div#preset-towers{
 
 	div.tower{
 
+		color: @gold;
+
 		&.preset{
-			color: green;
+			opacity: 1.0;
 		}
 
 		&.selected{
-			color: orange;
+			opacity: 0.5;
 		}
 
 		&.used{
-			color: blue;
 			display: none;
 		}
+
+		.AnimateAll();
 
 	}
 
