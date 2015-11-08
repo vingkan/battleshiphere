@@ -46,6 +46,17 @@ Tower.prototype.getCircle = function(){
 	return circle;
 }
 
+Tower.prototype.update = function(){
+	var screenCoords = map.geoToScreen(
+	{
+		lat: this.getLat(),
+		lng: this.getLon()
+	});
+	var geoCoords = map.getObjectsAt(screenCoords.lat, screenCoords.lng);
+	console.log(screenCoords)
+	console.log(geoCoords)
+}
+
 var nick = new Tower({
 	id: "1234",
 	name:"Tower",
