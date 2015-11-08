@@ -15,7 +15,7 @@ function initHereMap(){
 	});*/
 
 	var mapTypes = platform.createDefaultLayers();
-	var map = new H.Map(
+	map = new H.Map(
 		document.getElementById('map-container'),
 		mapTypes.satellite.map,
 		{
