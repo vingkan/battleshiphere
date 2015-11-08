@@ -142,6 +142,19 @@ function uploadTowerbase(data) {
 			player: value['player'] });
 	});
 }
+function updateTowerbase(data) {
+	$.each(data, function(index, value){
+		var path = new Firebase(towerbase.child(value['id']).toString());
+		path.set({
+			id: value['id'], 
+			name: value['name'], 
+			latitude: value['coordinate']['latitude'], 
+			longitude: value['coordinate']['longitude'], 
+			size: value['size'], 
+			player: value['player']
+		});
+	});
+}
 // Don't have time - going for hard code
 function removeTowerbase() {
 	// ToDO: Remove the towers folders which will remove the subfolders, recreate a towers folder.
