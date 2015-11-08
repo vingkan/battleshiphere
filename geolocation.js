@@ -30,4 +30,24 @@ function getUserLon(){
 	return userPosition.longitude;
 }
 
+function updateUserMarker(){
+	var objects = map.getObjects();
+	var target;
+	var size = objects.length;
+	for(var o = 0; o < size; o++){
+		if(objects[o] instanceof H.map.Marker){
+			target = objects[o];
+			console.log('found one!');
+			break;
+		}
+	}
+	function moveUserMarker(){
+		target.setPosition({
+			lat: userPosition.latitude,
+			lng: userPosition.longitude
+		});
+	}
+	getGeolocation(moveUserMarker);
+}
+
 console.log('LOADED geolocation.js');
