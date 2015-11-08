@@ -30,7 +30,7 @@ function getGame() {
 			questionLength: gameJSON['questionLength'],
 			rounds: gameJSON['spawnRate'],
 			spawnRate: gameJSON['spawnRate'],
-			taskManager: (gameJSON['taskManager']).toArray(),
+			//taskManager: JSON.parse(gameJSON['taskManager']),
 			towers: loadTowers(),
 			troops: loadTroops()
 		});
@@ -40,7 +40,9 @@ function getGame() {
 /*--------------------------------------------*/
 /*---> Download Task from Firebase <----------*/
 /*--------------------------------------------*/
+function loadTasks() {
 
+}
 
 /*--------------------------------------------*/
 /*---> Download troops from Firebase <--------*/
