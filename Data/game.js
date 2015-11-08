@@ -49,7 +49,7 @@ Game.prototype.set = function(attribute, value){
 }
 
 Game.prototype.update = function(){
-	//uploadTowerbase(this.towers);
+	updateTowerbase(this.towers);
 	var mapObjects = map.getObjects();
 	var size = mapObjects.length;
 	var towerCount = 0;
