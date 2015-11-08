@@ -32,10 +32,13 @@
 	</head>
 	<body>
 
-		<p>Hello World!</p>
+		<header id="menu" onclick="toggleMenu();">
+			<h1>ConQuiz</h1>
+		</header>
+		<div class="headerSpace"></div>
 
-		<div class="sidebar" id="preset-towers"><div>
-
+		<div class="sidebar open" id="preset-towers"></div>
+		
 		<div id="map-container"></div>
 
 		<h2>players</h2><textarea id="output-players"></textarea>
@@ -43,6 +46,8 @@
 		<h2>troops</h2><textarea id="output-troops"></textarea>
 
 		<textarea id="stack-log"></textarea>
+
+		<script type="text/javascript" src="frontend.js"></script>
 
 		<script type="text/javascript" src="Data/game.js"></script>
 		<script type="text/javascript" src="Data/task.js"></script>

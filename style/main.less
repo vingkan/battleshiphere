@@ -18,6 +18,48 @@
 html{
 	background: #dddddd;
 	overflow-x: hidden;
+	font-family: @bodyFont;
+}
+
+.AnimateAll(@time: 0.5s){
+	transition: all @time ease;
+	-webkit-transition: all @time ease;
+}
+
+div.sidebar{
+
+	position: fixed;
+	background: red;
+	top: 0;
+	z-index: 20;
+	width: 80vw;
+	height: 100vh;
+
+	&.open{
+		left: 0;
+	}
+
+	&.closed{
+		left: -80vw;
+	}
+
+	.AnimateAll();
+
+}
+
+header{
+	width: 100vw;
+	height: 10vh;
+	line-height: 10vh;
+	background: purple;
+	position: fixed;
+	top: 0;
+	left: 0;
+	z-index: 15;
+}
+
+div.headerSpace{
+	height: 10vh;
 }
 
 /*--------------------------------------------*/
@@ -35,6 +77,7 @@ h1, h2, h3, h4, h5, h6{
 
 h1{
 	font-size: 1.5 * @textSize;
+	text-align: center;
 }
 
 h2{
@@ -49,23 +92,45 @@ h3{
 /*---> FORMS <--------------------------------*/
 /*--------------------------------------------*/
 
+button, input, select{
+	outline: none;
+	border: none;
+	box-sizing: border-box;
+}
+
 /*--------------------------------------------*/
 /*---> TOWERS <-------------------------------*/
 /*--------------------------------------------*/
 
-div.tower{
+div#preset-towers{
 
-	&.preset{
-		color: green;
+	div.tower{
+		background: white;
+		display: inline-block;
+		width: 30vw;
+		margin: 5vw;
+		height: 30vw;
+		line-height: 30vw;
+		border-radius: 50%;
+		text-align: center;
+		font-size: 10vw;
 	}
 
-	&.selected{
-		color: orange;
-	}
+	div.tower{
 
-	&.used{
-		color: blue;
-		display: none;
+		&.preset{
+			color: green;
+		}
+
+		&.selected{
+			color: orange;
+		}
+
+		&.used{
+			color: blue;
+			display: none;
+		}
+
 	}
 
 }
