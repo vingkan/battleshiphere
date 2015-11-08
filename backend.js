@@ -171,12 +171,39 @@ function uploadPlayerbase(data) {
 			troops: JSON.stringify(value['troops'])
 		});
 	});
+	setDefaultPlayer();
 }
+function setDefaultPlayer(){
+	playerbase.once('value', function(snapshot){
+		snapshot.forEach(function(childSnapshot){
+			var path = new Firebase(playerbase.child(childSnapshot.key()).toString());
+			path.set({
+				id: childSnapshot.key(),
+				name: "",
+				icon: "png",
+				color: "blue",
+				latitude: 0,
+				longitude: 0,
+				troops: "[]"
+			});
+		});
+	});
+}
+
 function updatePlayerbase(data) {
-
-
+	$.each(data, function(index, value){
+		var path = new Firebase(playerbase.child(value['id']).toString());
+		path.set({
+			id: value['id'],
+			name: value['name'],
+			icon: value['team']['icon'],
+			color: value['team']['color'],
+			latitude: value['coordinate']['latitude'],
+			longitude: value['coordinate']['longitude'],
+			troops: JSON.stringify(value['troops'])
+		});
+	});
 }
-
 
 /*--------------------------------------------*/
 /*---> Download towers from Firebase <--------*/
