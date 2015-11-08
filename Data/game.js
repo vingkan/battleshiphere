@@ -57,11 +57,13 @@ Game.prototype.update = function(){
 	var output = document.getElementById('output-' + list);
 	for(var i = 0; i < size; i++){
 		currentTower = this.towers[i];
-		circle = currentTower.getCircle()
-		map.addObject(circle);
-		currentTower.update();
-		//TEXTAREA OUTPUT
-		currentTower.value += currentTower + '\n';
+		if(currentTower.placed){
+			circle = currentTower.getCircle();
+			map.addObject(circle);
+			//currentTower.update();
+			//TEXTAREA OUTPUT
+			currentTower.value += currentTower + '\n';	
+		}
 	}
 	
 }
@@ -88,4 +90,11 @@ Game.prototype.getObjectById = function(list, id){
 
 Game.prototype.addTask = function(task){
 	this.taskManager.taskList.push(task);
+}
+
+
+Game.prototype.printAllTowerCoordinates = function(){
+	for(var t = 0; t < this.towers.length; t++){
+		console.log(this.towers[t].id + ', ' + this.towers[t].getLat() + ', ' + this.towers[t].getLon());
+	}
 }

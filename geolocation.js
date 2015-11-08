@@ -50,6 +50,21 @@ function haversineDistance(lat1, lon1, lat2, lon2){
  	return d;
 }
 
+function distanceToTower(tower){
+	return haversineDistance(
+		getUserLat(), getUserLon(),
+		tower.getLat(), tower.getLon()
+	);
+}
+
+/*function isUserAtTower(tower){
+	var response = false;
+	if(distanceToTower(tower) <= tower.get('size')){
+		
+	}
+	return response;
+}*/
+
 function updateUserMarker(){
 	var objects = map.getObjects();
 	var target;

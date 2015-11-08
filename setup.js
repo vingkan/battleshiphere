@@ -20,7 +20,11 @@ function setFocusObject(list, objectID){
 	toggleMenu();
 	publicLog('Click on spot on the map to place the tower at.');
 	mapClickCallback = function(coordinates){
-		plantTowerOnMap(coordinates, focusObject.size);
+		focusObject.coordinate.latitude = coordinates.lat;
+		focusObject.coordinate.longitude = coordinates.lng;
+		/*focusObject.set('size', focusObject.size)
+		plantTowerOnMap(coordinates, focusObject.size);*/
+		focusObject.set('placed', true);
 		focusObject = null;
 		mapClickCallback = null;
 		$('#' + objectID).removeClass('selected');
