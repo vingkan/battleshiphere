@@ -63,7 +63,7 @@ Game.prototype.update = function(){
 		//TEXTAREA OUTPUT
 		currentTower.value += currentTower + '\n';
 	}
-	
+
 }
 
 Game.prototype.push = function(list, object){

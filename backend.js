@@ -21,7 +21,7 @@ function loadTroops() {
 	var troopHolder = [];
 	var newTroop;
 	troopbase.on('child_added', function(update){
-		if (update['Empty'] != "DoNotDelete")) { //Stops the empty from being pulled
+		if (update['Empty'] != "DoNotDelete") { //Stops the empty from being pulled
 			var troopJSON = update.val();
 			newTroop = new Troop({
 				id: update['id'],
@@ -33,7 +33,7 @@ function loadTroops() {
 			});
 			troopHolder.push(newTroop);
 		}
-		
+
 	});
 	return troopHolder;
 }
@@ -78,11 +78,11 @@ function loadPlayers() {
 	var newPlayer;
 	playerbase.on('child_added', function(update) {
 		var playerJSON = update.val();
-		newPlayer = new Tower({
+		newPlayer = new Player({
 			id: update['id'],
 			team: {icon: playerJSON['team']['icon'], color: playerJSON['team']['color']},
-			coordinate: {latitude: playerJSON['coordinate']['latitude'], longitude: playerJSON['coordinate']['longitude']},
-			troops: update['troops']
+			coordinate: {latitude: playerJSON['latitude'], longitude: playerJSON['longitude']},
+			troops: JSON.stringify(playerJSON['troops'])
 		});
 		playerHolder.push(newPlayer);
 	});
@@ -96,10 +96,10 @@ function loadPlayers() {
 function uploadPlayerbase(data) {
 	$.each(data, function(index, value){
 		playerbase.push({
-			id: value['id'], 
-			name: value['name'], 
-			team: {icon: value['icon'], color: value['color']}, 
-			coordinate: {latitude: value['coordinate']['latitude'], longitude: value['coordinate']['longitude']}, 
+			id: value['id'],
+			name: value['name'],
+			team: {icon: value['icon'], color: value['color']},
+			coordinate: {latitude: value['coordinate']['latitude'], longitude: value['coordinate']['longitude']},
 			troops: value['troops']
 		});
 	});
@@ -114,12 +114,14 @@ function loadTowers() {
 	var newTower;
 	towerbase.on('child_added', function(update) {
 		var towerJSON = update.val();
+		console.log(towerJSON);
 		newTower = new Tower({
 			id: towerJSON['id'],
 			name: towerJSON['name'],
-			coordinate: {latitude: towerJSON['coordinate']['latitude'], longitude: towerJSON['coordinate']['longitude']},
+			coordinate: {latitude: towerJSON['latitude'], longitude: towerJSON['longitude']},
 			size: towerJSON['size'],
-			player: towerJSON['player']
+			player: JSON.stringify(towerJSON['player']),
+			troops: "[]"
 		});
 		towerHolder.push(newTower);
 	});
@@ -132,11 +134,11 @@ function loadTowers() {
 /*--------------------------------------------*/
 function uploadTowerbase(data) {
 	$.each(data, function(index, value){
-		towerbase.push({id: value['id'], 
-			name: value['name'], 
-			coordinate: {latitude: value['coordinate']['latitude'], 
-			longitude: value['coordinate']['longitude']}, 
-			size: value['size'], 
+		towerbase.push({id: value['id'],
+			name: value['name'],
+			coordinate: {latitude: value['coordinate']['latitude'],
+			longitude: value['coordinate']['longitude']},
+			size: value['size'],
 			player: value['player'] });
 	});
 }
@@ -153,7 +155,6 @@ function loadQuestions() {
     var newQuestion;
     database.on('child_added', function(update) {
         var questionJSON = update.val();
-        console.log(questionJSON)
         newQuestion = new Question({
             id: generateNewID('question'),
             question: questionJSON['question'],
@@ -181,7 +182,7 @@ function getData() {
 function uploadFirebase(data){
     var cells = data.feed.entry;
     rows = [];
-    
+
     for (var i = 0; i < cells.length; i++){
         var rowObj = {};
         rowObj.timestamp = cells[i].title.$t;
