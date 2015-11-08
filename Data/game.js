@@ -50,7 +50,7 @@ Game.prototype.set = function(attribute, value){
 
 Game.prototype.update = function(){
 	updateTowerbase(this.towers);
-	loadMyTroops();
+	//loadMyTroops();
 	checkGameReadyState();
 }
 
