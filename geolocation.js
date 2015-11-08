@@ -29,3 +29,5 @@ function getUserLat(){
 function getUserLon(){
 	return userPosition.longitude;
 }
+
+console.log('LOADED geolocation.js');
