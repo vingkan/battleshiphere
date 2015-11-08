@@ -33,7 +33,7 @@ Tower.prototype.toString = function(){
 
 Tower.prototype.toPresetHTML = function(){
 	var html = '';
-	html += '<div class="tower">' + this.size + '</div>';
+	html += '<div class="tower" onclick="setFocusObject(\'towers\', \'' + this.id + '\');">' + this.size + '</div>';
 	return html;
 }
 

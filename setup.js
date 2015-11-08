@@ -6,8 +6,17 @@ function initGame(){
 	createTowerPresets();
 }
 
-function mapClickCallback(coordinates){
-	alert(coordinates);
+var mapClickCallback = function(coordinates){
+	console.log('no function event set yet');
+};
+
+var focusObject;
+
+function setFocusObject(list, objectID){
+	focusObject = game.getObjectById(list, objectID);
+	mapClickCallback = function(coordinates){
+		plantTowerOnMap(coordinates, focusObject.size);
+	}
 }
 
 //DATA
@@ -21,16 +30,19 @@ function mapClickCallback(coordinates){
 }*/
 
 function createTowerPresets(){
-	var sizes = ['small', 'small', 'medium', 'medium', 'medium', 'big', 'big'];
+	var sizes = [5, 5, 10, 10, 10, 15, 15];
 	var presets = sizes.length;
+	var tower;
 	for(var s = 0; s < presets; s++){
-		plantTowerOnMap(
+		tower = plantTowerOnMap(
 			{
 				lat: 0,
 				lng: 0
 			},
 			sizes[s]
 		);
+		var towerPresets = document.getElementById('preset-towers');
+		towerPresets.innerHTML += tower.toPresetHTML();
 	}
 }
 
@@ -38,7 +50,7 @@ function createTowerPresets(){
 /*
 * Open selector dialog for creator user to select radius size
 */
-function getTowerRadius(size){
+/*function getTowerRadius(size){
 	var radius = 0;
 	switch(size){
 		case 'small':
@@ -51,27 +63,26 @@ function getTowerRadius(size){
 			radius = 15;
 			break;
 		default:
-			alert('TOWER TYPE ERROR');
+			console.log('TOWER TYPE ERROR');
 	}
 	return radius;
-}
+}*/
 
 //APPLICATION
 /*
 * Params: coordinates: lat/lon pair
 * Return: void, creates new Tower object and adds it to Game
 */
-function plantTowerOnMap(coordinates, size){
+function plantTowerOnMap(coordinates, towerRadius){
 	/*var input = prompt("Enter a pair of comma-separated coordinates for a Tower:");
 	var coords = input.split(",");
 	var coordinates = {
 		latitude: coords[0],
 		longitude: coords[1]
 	}*/
-	var towerRadius = getTowerRadius(size);
 	var tower = new Tower({
 		id: generateNewID('tower'),
-		name: generateRandomName(),
+		name: "PRESET",
 		latitude: coordinates.lat,
 		longitude: coordinates.lng,
 		size: towerRadius,
@@ -79,4 +90,5 @@ function plantTowerOnMap(coordinates, size){
 		troops: null
 	});
 	game.push('towers', tower);
+	return tower;
 }
