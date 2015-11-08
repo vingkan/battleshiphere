@@ -31,6 +31,25 @@
 
 		<script type="text/javascript">
 
+		var game = new Game({
+			id: 'id',
+			name: "Nick"
+		});
+
+		game.players.push('player1');
+
+		function updateUserPosition(){
+			var changeLocationTask = new Task({
+				round: 1,
+				id: 'player1',
+				attribute: 'coordinates',
+				value: userPosition
+			});
+
+		}
+
+		getGeolocation(updateUserPosition);
+
 		console.log('LOADED MAIN');
 
 		</script>
