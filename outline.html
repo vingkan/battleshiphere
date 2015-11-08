@@ -6,6 +6,9 @@
 		<!-- META TAGS for mobile devices -->
 		<meta name="viewport" content="initial-scale=1.0, width=device-width" />
 		<!-- HERE MAPS API -->
+		<script type="text/javascript" src="http://js.api.here.com/v3/3.0/mapsjs-core.js"></script>
+		<script type="text/javascript" src="http://js.api.here.com/v3/3.0/mapsjs-service.js"></script>
+		<script type="text/javascript" src="http://js.api.here.com/v3/3.0/mapsjs-mapevents.js"></script>
 		<!-- STYLESHEETS -->
 		<link rel="stylesheet" type="text/css" href="style/reset.css">
 		<link rel="stylesheet" type="text/css" href="style/main.css">
@@ -15,11 +18,18 @@
 		<!--<script src='https://cdn.firebase.com/js/client/2.2.1/firebase.js'></script>-->
 		<style type="text/css">
 
+			div#map-container{
+				width: 100vw;
+				height: 50vh;
+			}
+
 		</style>
 	</head>
 	<body>
 
 		<p>Hello World!</p>
+
+		<div id="map-container"></div>
 
 		<textarea id="stack-log"></textarea>
 
@@ -35,11 +45,20 @@
 
 		<script type="text/javascript">
 
+		var platform = new H.service.Platform({
+			app_id: "habu7uC2upRacruDrUfu",
+			app_code: "85_CDKXMNkoraKX54-ZS-g",
+			useCIT: true,
+			useHTTPS: true
+		});
+
 		var game;
 
 		initGame();
 
-		game.push('players', new Player({
+		getGeolocation(initHereMap);
+
+		/*game.push('players', new Player({
 			id: generateNewID('player'),
 			name: generateRandomName(),
 			icon: null,
@@ -87,7 +106,7 @@
 			latitude: 0,
 			longitude: 0,
 			troops: null
-		}));
+		}));*/
 
 		function updateUserPosition(){
 			var changeLocationTask = new Task({
