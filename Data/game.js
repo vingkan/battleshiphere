@@ -49,21 +49,35 @@ Game.prototype.set = function(attribute, value){
 }
 
 Game.prototype.update = function(){
-	var size = this.towers.length;
-	var circle;
-	var currentTower;
-	//TEXTAREA OUTPUT
-	var list = "towers";
-	var output = document.getElementById('output-' + list);
-	for(var i = 0; i < size; i++){
-		currentTower = this.towers[i];
-		circle = currentTower.getCircle()
-		map.addObject(circle);
-		currentTower.update();
-		//TEXTAREA OUTPUT
-		currentTower.value += currentTower + '\n';
-	}
+	updateTowerbase(this.towers);
+	loadMyTroops();
+	checkGameReadyState();
+}
 
+Game.prototype.loadMyTroops = function(){
+	var size = this.troops.length;
+	var currentTroop;
+	for(var i = 0; i < size; i++){
+		//if(currentTroop.id)
+	}
+}
+
+function checkGameReadyState(){
+	var mapObjects = map.getObjects();
+	var size = mapObjects.length;
+	var towerCount = 0;
+	for(var b = 0; b < size; b++){
+		if(mapObjects[b] instanceof H.map.Circle){
+			towerCount++;
+		}
+	}
+	if(towerCount == 7){
+		console.log(':) GAME IS READY!');
+		openGame();
+	}
+	else{
+		console.log(':( Only ' + towerCount + ' towers have been placed.');
+	}
 }
 
 Game.prototype.push = function(list, object){
@@ -88,4 +102,11 @@ Game.prototype.getObjectById = function(list, id){
 
 Game.prototype.addTask = function(task){
 	this.taskManager.taskList.push(task);
+}
+
+
+Game.prototype.printAllTowerCoordinates = function(){
+	for(var t = 0; t < this.towers.length; t++){
+		console.log(this.towers[t].id + ', ' + this.towers[t].getLat() + ', ' + this.towers[t].getLon());
+	}
 }

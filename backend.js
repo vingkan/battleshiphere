@@ -41,7 +41,7 @@ function loadTroops() {
 /*--------------------------------------------*/
 /*---> Upload troops to Firebase <------------*/
 /*--------------------------------------------*/
-function addTroops(data) {
+function uploadTroops(data) {
 	$.each(data, function(index, value){
 		troopbase.push({
 			id: value['id'],
@@ -79,10 +79,11 @@ function loadPlayers() {
 	playerbase.on('child_added', function(update) {
 		var playerJSON = update.val();
 		newPlayer = new Player({
-			id: update['id'],
-			team: {icon: playerJSON['team']['icon'], color: playerJSON['team']['color']},
-			coordinate: {latitude: playerJSON['latitude'], longitude: playerJSON['longitude']},
-			troops: JSON.stringify(playerJSON['troops'])
+			id: playerJSON['id'],
+			icon: playerJSON['team']['icon'],
+			color: playerJSON['team']['color'],
+			coordinate: { latitude: playerJSON['latitude'], longitude: playerJSON['longitude']},
+			troops: playerJSON['troops']
 		});
 		playerHolder.push(newPlayer);
 	});
@@ -99,8 +100,9 @@ function uploadPlayerbase(data) {
 			id: value['id'],
 			name: value['name'],
 			team: {icon: value['icon'], color: value['color']},
-			coordinate: {latitude: value['coordinate']['latitude'], longitude: value['coordinate']['longitude']},
-			troops: value['troops']
+			latitude: value['coordinate']['latitude'],
+			longitude: value['coordinate']['longitude'],
+			troops: JSON.Stringify(value['troops'])
 		});
 	});
 }
@@ -136,10 +138,40 @@ function uploadTowerbase(data) {
 	$.each(data, function(index, value){
 		towerbase.push({id: value['id'],
 			name: value['name'],
-			coordinate: {latitude: value['coordinate']['latitude'],
-			longitude: value['coordinate']['longitude']},
+			latitude: value['coordinate']['latitude'],
+			longitude: value['coordinate']['longitude'],
 			size: value['size'],
 			player: value['player'] });
+	});
+	setDefaultTower();
+}
+function setDefaultTower(){
+	towerbase.once('value', function(snapshot){
+		snapshot.forEach(function(childSnapshot){
+			var path = new Firebase(towerbase.child(childSnapshot.key()).toString());
+			path.set({
+				id: childSnapshot.key(),
+				name: "",
+				latitude: 0,
+				longitude: 0,
+				size: 10,
+				player: ""
+			});
+		});
+	});
+}
+
+function updateTowerbase(data) {
+	$.each(data, function(index, value){
+		var path = new Firebase(towerbase.child(value['id']).toString());
+		path.set({
+			id: value['id'],
+			name: value['name'],
+			latitude: value['coordinate']['latitude'],
+			longitude: value['coordinate']['longitude'],
+			size: value['size'],
+			player: value['player']
+		});
 	});
 }
 // Don't have time - going for hard code
@@ -152,6 +184,7 @@ function removeTowerbase() {
 /*---> Download question from Firebase <------*/
 /*--------------------------------------------*/
 function loadQuestions() {
+	var questionHolder = [];
     var newQuestion;
     database.on('child_added', function(update) {
         var questionJSON = update.val();
@@ -160,8 +193,9 @@ function loadQuestions() {
             question: questionJSON['question'],
             answers: "["+questionJSON['correct']+", "+questionJSON['wa1']+", "+questionJSON['wa2']+", "+questionJSON['wa3']+"]"
         });
-        game.push("questions", newQuestion);
+        questionHolder.push(newQuestion);
     });
+    return questionHolder;
 }
 
 
