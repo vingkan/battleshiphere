@@ -23,6 +23,9 @@ Troop.prototype.toString = function(){
 	return ret;
 }
 
+// How object instantiation works
+// var troop = new Troop({id: "123", name: "troop1", player: "moh", });
+
 /**
 Example object
 var someTroop = new Troop({
