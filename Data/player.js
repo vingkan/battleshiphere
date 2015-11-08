@@ -21,9 +21,24 @@ Player.prototype.set = function(attribute, value) {
 	this[attribute] = value;
 }
 
-Player.prototype.updateLocation = function() {
+Player.prototype.updateLocation = function(newLoc) {
 	// update location called in task object
+	this.coordinate = {
+		latitude:parseFloat(newLoc['latitude']),
+		longitude:parseFloat(newLoc['longitude'])
+	};
 }
 
+Player.prototype.toString = function() {
+	return "Player " + this.id + ": " + this.name + " Team:" + this.team.color;
+}
+
+var testPlayer = new Player({
+    "id": "marcuswan",
+    "name": "Marcus Wan",
+    "team": {"icon": "png", "color": "Blue"},
+    "coordinates": {"latitude": "10", "longitude": "20"},
+    "troops": "[]"
+});
 
 console.log("Player loaded");
