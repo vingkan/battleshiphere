@@ -2,8 +2,8 @@
 // Reference to the root of the Firebase database
 var database = new Firebase("https://conquiz.firebaseio.com/");
 // Reference to the google sheets of questions
-var questionsLink = "https://spreadsheets.google.com/feeds/list/1C1POJrIlpm1R3muE0ImmI_ifxpH_aEfPP-QSyl3o2Kg/1/public/basic?alt=json-in-script&callback=JSON_CALLBACK";
-var questions;
+var questionsLink = 'https://spreadsheets.google.com/feeds/list/1C1POJrIlpm1R3muE0ImmI_ifxpH_aEfPP-QSyl3o2Kg/1/public/basic?alt=json';
+var question;
 var rows;
 
 $("#upload").click(function() { // If the user clicks on the input with the id="upload"
@@ -18,6 +18,17 @@ $("#upload").click(function() { // If the user clicks on the input with the id="
 	}else { // warns user of their empty textbox
 		console.log("Please input values into the textbox");
 	}
+});
+
+database.on('child_added', function(update) {
+	question = {};
+	var questionJSON = update.val();
+	var question = new Question({
+		id: '1',
+		question: {Question: question['question']},
+		answers: {correct: question['correct'], wa1: question['wa1'], wa2: question['wa2'], wa3: question['wa3']}
+	})
+	game.push("question", question);
 });
 
 // Get an update once the database has new data
@@ -39,12 +50,10 @@ function displayUpdate(name, text) {
 };
 
 
-
-
 // One time push to update the questions on firebase
 function getData() {
     $.ajax({
-        url:'https://spreadsheets.google.com/feeds/list/1C1POJrIlpm1R3muE0ImmI_ifxpH_aEfPP-QSyl3o2Kg/1/public/basic?alt=json',
+        url: questionsLink,
         success: function(data){
             uploadFirebase(data);
         }
@@ -69,6 +78,5 @@ function uploadFirebase(data){
     	database.push({question: rows[i]['timestamp'], correct: rows[i]['correct'], wa1: rows[i]['wa1'], wa2: rows[i]['wa2'], wa3: rows[i]['wa3']});
     }
 }
-
 
 console.log('LOADED BACKEND');
