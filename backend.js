@@ -235,7 +235,7 @@ function uploadTowerbase(data) {
 			size: value['size'],
 			player: value['player'] });
 	});
-	setDefaultTower();
+	//setDefaultTower();
 }
 function setDefaultTower(){
 	towerbase.once('value', function(snapshot){
