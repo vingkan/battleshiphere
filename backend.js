@@ -83,7 +83,7 @@ function loadPlayers() {
 			icon: playerJSON['team']['icon'],
 			color: playerJSON['team']['color'],
 			coordinate: { latitude: playerJSON['latitude'], longitude: playerJSON['longitude']},
-			troops: playerJSON['troops']
+			troops: JSON.stringify(playerJSON['troops'])
 		});
 		playerHolder.push(newPlayer);
 	});
