@@ -17,7 +17,7 @@ function setFocusObject(list, objectID){
 	focusObject = game.getObjectById(list, objectID);
 	$('#' + objectID).removeClass('preset');
 	$('#' + objectID).addClass('selected');
-	toggleMenu();
+	openMenu();
 	publicLog('Click on spot on the map to place the tower at.');
 	mapClickCallback = function(coordinates){
 		focusObject.coordinate.latitude = coordinates.lat;

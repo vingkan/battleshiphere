@@ -33,11 +33,25 @@
 	</head>
 	<body>
 
-		<header id="menu" onclick="toggleMenu();">
+		<header id="menu" class="closed" onclick="openMenu();">
+			<span id="menu">&#8801;</span>
 			<center>
 				<img id="logo" src="style/img/goldLogo.png">
-			</center>
+			</center>			
 		</header>
+
+		<center>
+			<div id="menuOptions">
+				<h1>Menu</h1>
+				<div class="menuOption" onclick="toggleMenu('towers');">
+					Towers Menu
+				</div>
+				<div class="menuOption" onclick="toggleMenu('questions');">
+					Battle Screen
+				</div>
+			</div>
+		</center>
+
 		<div class="headerSpace"></div>
 
 		<div class="sidebar closed" id="sidebar-towers">
@@ -49,8 +63,8 @@
 		</div>
 
 		<div class="sidebar closed" id="sidebar-questions">
-			<h1>Towers</h1>
-			<p>The number indicates the radius size around each tower.</p>
+			<h1>Battle</h1>
+			<p>Answer questions to defeat enemy troops!</p>
 			<center>
 				<div class="wrapper" id="battle-questions"></div>
 			</center>
