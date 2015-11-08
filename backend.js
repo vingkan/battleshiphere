@@ -2,7 +2,8 @@
 // Reference to the root of the Firebase database
 var database = new Firebase("https://conquiz.firebaseio.com/");
 var towerbase = new Firebase("https://towercoord.firebaseio.com/-K2aUIZRYFI5l6Tov1JA/towers");
-var playerbase = new Firebase("https://towercoord.firebaseio.com/-K2aUIZRYFI5l6Tov1JA/players")
+var playerbase = new Firebase("https://towercoord.firebaseio.com/-K2aUIZRYFI5l6Tov1JA/players");
+var troopbase = new Firebase("https://towercoord.firebaseio.com/-K2aUIZRYFI5l6Tov1JA/troops");
 // Reference to the google sheets of questions
 var questionsLink = 'https://spreadsheets.google.com/feeds/list/1C1POJrIlpm1R3muE0ImmI_ifxpH_aEfPP-QSyl3o2Kg/1/public/basic?alt=json';
 
@@ -12,10 +13,46 @@ var rows;
 
 
 // ToDO: downloading from Firebase should be a return function, to avoid crossing stack
+/*--------------------------------------------*/
+/*---> Download troops from Firebase <--------*/
+/*--------------------------------------------*/
+
+
+/*--------------------------------------------*/
+/*---> Upload troops to Firebase <------------*/
+/*--------------------------------------------*/
+function addTroops(data) {
+	$.each(data, function(index, value){
+		troopbase.push({
+			id: value['id'],
+			name: value['name'],
+			playerID: value['playerID'],
+			towerID: value['towerID'],
+			question: value['question'],
+			alive: value['alive']
+		});
+	});
+}
+
 
 /*--------------------------------------------*/
 /*---> Download player from Firebase <--------*/
 /*--------------------------------------------*/
+function loadPlayers() {
+	var playerHolder = [];
+	var newPlayer;
+	playerbase.on('child_added', function(update) {
+		var playerJSON = update.val();
+		newPlayer = new Tower({
+			id: update['id'],
+			team: {icon: playerJSON['team']['icon'], color: playerJSON['team']['color']},
+			coordinate: {latitude: playerJSON['coordinate']['latitude'], longitude: playerJSON['coordinate']['longitude']},
+			troops: update['troops']
+		});
+		playerHolder.push(newPlayer);
+	});
+	return playerHolder;
+}
 
 
 /*--------------------------------------------*/
@@ -24,11 +61,11 @@ var rows;
 function uploadPlayerbase(data) {
 	$.each(data, function(index, value){
 		playerbase.push({
-			id: data['id'], 
-			name: data['name'], 
-			team: {icon: data['icon'], color: data['color']}, 
-			coordinate: {latitude: data['coordinate']['latitude'], longitude: data['coordinate']['longitude']}, 
-			troops: data['troops']
+			id: value['id'], 
+			name: value['name'], 
+			team: {icon: value['icon'], color: value['color']}, 
+			coordinate: {latitude: value['coordinate']['latitude'], longitude: value['coordinate']['longitude']}, 
+			troops: value'troops']
 		});
 	});
 }
@@ -38,8 +75,9 @@ function uploadPlayerbase(data) {
 /*---> Download towers from Firebase <--------*/
 /*--------------------------------------------*/
 function loadTowers() {
+	var towerHolder = [];
 	var newTower;
-	database.on('child_added', function(update) {
+	towerbase.on('child_added', function(update) {
 		var towerJSON = update.val();
 		newTower = new Tower({
 			id: towerJSON['id'],
@@ -48,8 +86,9 @@ function loadTowers() {
 			size: towerJSON['size'],
 			player: towerJSON['player']
 		});
-		game.push("towers", newTower);
+		towerHolder.push(newTower);
 	});
+	return towerHolder;
 }
 
 
