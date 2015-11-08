@@ -1,5 +1,5 @@
 function toggleMenu(){
-	var presetTowers = $('#preset-towers');
+	var presetTowers = $('#sidebar-towers');
 	if(presetTowers.hasClass('open')){
 		presetTowers.removeClass('open');
 		presetTowers.addClass('closed');

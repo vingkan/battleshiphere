@@ -39,16 +39,17 @@
 		</header>
 		<div class="headerSpace"></div>
 
-		<footer>
-			<textarea id="public-log"></textarea>
-		</footer>
-
-		<div class="sidebar open" id="preset-towers">
+		<div class="sidebar closed" id="sidebar-towers">
 			<h1>Towers</h1>
 			<p>The number indicates the radius size around each tower.</p>
+			<center>
+				<div class="wrapper" id="preset-towers"></div>
+			</center>
 		</div>
 		
 		<div id="map-container"></div>
+
+	<div style="display:none">
 
 		<h2>players</h2><textarea id="output-players"></textarea>
 		<h2>towers</h2><textarea id="output-towers"></textarea>
@@ -56,6 +57,12 @@
 		<h2>questions</h2><textarea id="output-questions"></textarea>
 
 		<textarea id="stack-log"></textarea>
+
+	</div>
+
+		<footer>
+			<textarea id="public-log"></textarea>
+		</footer>
 
 		<script type="text/javascript" src="frontend.js"></script>
 		<!--<script type="text/javascript" src="backend.js"></script>-->
