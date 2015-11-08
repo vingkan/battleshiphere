@@ -47,6 +47,26 @@
 			troops: null
 		}));
 
+		game.push('troops', new Troop({
+			id: generateNewID('troop'),
+			name: generateRandomName(),
+			icon: null,
+			color: null,
+			latitude: 0,
+			longitude: 0,
+			troops: null
+		}));
+
+		game.push('players', new Player({
+			id: generateNewID('player'),
+			name: generateRandomName(),
+			icon: null,
+			color: null,
+			latitude: 0,
+			longitude: 0,
+			troops: null
+		}));
+
 		function updateUserPosition(){
 			var changeLocationTask = new Task({
 				round: 1,
