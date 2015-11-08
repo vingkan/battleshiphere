@@ -14,10 +14,14 @@ var focusObject;
 
 function setFocusObject(list, objectID){
 	focusObject = game.getObjectById(list, objectID);
+	$('#' + objectID).removeClass('preset');
+	$('#' + objectID).addClass('selected');
 	mapClickCallback = function(coordinates){
 		plantTowerOnMap(coordinates, focusObject.size);
 		focusObject = null;
 		mapClickCallback = null;
+		$('#' + objectID).removeClass('selected');
+		$('#' + objectID).addClass('used');
 	}
 }
 
