@@ -54,10 +54,14 @@ function addTroops(data) {
 function removeTroops() {
 	troopbase.once('value', function(snapshot) {
 		snapshot.forEach(function(childSnapshot){
-			var key = childSnapshot.key();
-			var childData = childSnapshot.val();
-			console.log(key);
-			console.log(childData);
+			// You can also get the key and the value of the child in the troopbase folder
+			//var key = childSnapshot.key();
+			//var childData = childSnapshot.val();
+			if (childSnapshot.key().equals("Empty")) {
+				console.log("Empty");
+			}
+			//troopbase.child(childSnapshot.key()).toString().remove();
+			//troopbase.child(childSnapshot.key()).remove();
 		});
 	});
 }
