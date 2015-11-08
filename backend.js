@@ -142,6 +142,17 @@ function uploadTowerbase(data) {
 			player: value['player'] });
 	});
 }
+
+function setTowerKey(){
+	towerbase.once('value', function(snapshot){
+		snapshot.forEach(function(childSnapshot){
+			var childData = childSnapshot.val();
+			var path = new Firebase(towerbase.child(childSnapshot.key()).toString());
+			childData['id'].set(childSnapshot.key());
+		});
+	});
+}
+
 function updateTowerbase(data) {
 	$.each(data, function(index, value){
 		var path = new Firebase(towerbase.child(value['id']).toString());
