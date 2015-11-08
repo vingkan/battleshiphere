@@ -53,8 +53,8 @@ Tower.prototype.update = function(){
 		lng: this.getLon()
 	});
 	//var geoCoords = map.getObjectsAt(screenCoords.lat, screenCoords.lng);
-	console.log(screenCoords)
-	console.log(geoCoords)
+	//console.log(screenCoords)
+	//console.log(geoCoords)
 }
 
 Tower.prototype.addTroops = function(troops){
