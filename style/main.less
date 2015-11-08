@@ -5,6 +5,7 @@
 
 @gold: #f6a525;
 @maroon: #63000c;
+@charcoal: #1a1a1a;
 
 @mainColor: @maroon;
 @mainDark: darken(@mainColor, 10%);
@@ -13,8 +14,8 @@
 
 @textSize: 5vh;
 
-@headFont: sans-serif;
-@bodyFont: sans-serif;
+@headFont: 'Titillium Web', sans-serif;
+@bodyFont: 'Source Sans Pro', sans-serif;
 
 /*--------------------------------------------*/
 /*---> STRUCTURE <----------------------------*/
@@ -34,7 +35,7 @@ html{
 div.sidebar{
 
 	position: fixed;
-	background: red;
+	background: @charcoal;
 	top: 0;
 	z-index: 20;
 	width: 80vw;
@@ -85,7 +86,7 @@ footer{
 		height: 10vh;
 		line-height: 5vh;
 		left: 0;
-		background: blue;
+		background: @gold;
 		color: white;
 		font-family: @bodyFont;
 		font-size: 3vh;

@@ -42,21 +42,21 @@ Tower.prototype.getCircle = function(){
 		lat: this.getLat(),
 		lng: this.getLon()
 	}, this.size);
-	console.log(this.getLat() + " " + this.getLon())
+	console.log("Circle Center: " + this.getLat() + ", " + this.getLon())
 	return circle;
 }
 
-<<<<<<< HEAD
 Tower.prototype.update = function(){
 	var screenCoords = map.geoToScreen(
 	{
 		lat: this.getLat(),
 		lng: this.getLon()
 	});
-	var geoCoords = map.getObjectsAt(screenCoords.lat, screenCoords.lng);
+	//var geoCoords = map.getObjectsAt(screenCoords.lat, screenCoords.lng);
 	console.log(screenCoords)
 	console.log(geoCoords)
-=======
+}
+
 Tower.prototype.addTroops = function(troops){
 	for (var i = 0; i < troops.length; i++){
 		this.troops.push(troops[i].id);
@@ -65,15 +65,14 @@ Tower.prototype.addTroops = function(troops){
 	// database.push(this);
 }
 
-Tower.prototype.getTroopsByPlayer(playerID) = function(id){
+Tower.prototype.getTroopsByPlayer = function(id){
 	var troops = this.troops
 	var out = [];
 	for (var i = 0; i < troops.length; i++){
 		if(troops[i].playerID === players)
 		out.push(troops[i].id);
 	}
-	return out
->>>>>>> origin/master
+	return out;
 }
 
 var nick = new Tower({

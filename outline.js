@@ -59,11 +59,4 @@ function initHereMap(){
 
 }
 
-function createMapCallback() {
-	//initHereMap();
-	console.log("This is where we would load the map for the first time.");
-}
-
-getGeolocation(createMapCallback);
-
 console.log('LOADED outline.js');
