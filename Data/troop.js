@@ -1,7 +1,6 @@
 
 // parse array -> string
-function Troop(data)
-{
+function Troop(data){
 	this.id = data['id'];
 	this.name = data['name'];
 	this.playerID = data['playerID'];

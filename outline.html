@@ -24,10 +24,11 @@
 		<textarea id="stack-log"></textarea>
 
 		<script type="text/javascript" src="Data/game.js"></script>
-		<script type="text/javascript" src="Data/tower.js"></script>
-		<script type="text/javascript" src="Data/player.js"></script>
-		<script type="text/javascript" src="Data/troop.js"></script>
 		<script type="text/javascript" src="Data/task.js"></script>
+		<script type="text/javascript" src="Data/player.js"></script>
+		<script type="text/javascript" src="Data/tower.js"></script>
+		<script type="text/javascript" src="Data/troop.js"></script>
+		<script type="text/javascript" src="Data/question.js"></script>
 
 		<script type="text/javascript" src="geolocation.js"></script>
 		<script type="text/javascript" src="outline.js"></script>
@@ -35,8 +36,8 @@
 		<script type="text/javascript">
 
 		var game = new Game({
-			id: 'id',
-			name: "Nick"
+			id: 'game0',
+			name: "Sample Game"
 		});
 
 		game.push('players', new Player({
@@ -59,14 +60,24 @@
 			troops: null
 		}));
 
+		game.push('questions', new Question({
+			'id':'420691337',
+			'question':'Where is it 5 Oclock?',
+			'answers': [
+				'Somewhere',
+				'Here',
+				'Everywhere',
+				'Nowhere',
+				'node.js'
+			]
+		}));
+
 		game.push('troops', new Troop({
 			id: generateNewID('troop'),
 			name: generateRandomName(),
-			icon: null,
-			color: null,
-			latitude: 0,
-			longitude: 0,
-			troops: null
+			playerID: game.players[0].get('id'),
+			towerID: game.towers[0].get('id'),
+			question: testQuestion.get('id')
 		}));
 
 		game.push('players', new Player({
