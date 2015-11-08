@@ -3,24 +3,16 @@
 var database = new Firebase("https://conquiz.firebaseio.com/");
 // Reference to the google sheets of questions
 var questionsLink = 'https://spreadsheets.google.com/feeds/list/1C1POJrIlpm1R3muE0ImmI_ifxpH_aEfPP-QSyl3o2Kg/1/public/basic?alt=json';
+
 var question;
 var questionJSON;
 var rows;
 
-$("#upload").click(function() { // If the user clicks on the input with the id="upload"
-	var name = $("#nameInput").val();
-	var text = $("#messageInput").val();
-	if (name.length != 0 && text.length != 0) { // Don't upload if there's no information in the textboxes
-		console.log(name.length);
-		console.log(text.length);
 
-		database.push({name: name, text: text}); // Push the data onto the database
-
-	}else { // warns user of their empty textbox
-		console.log("Please input values into the textbox");
-	}
-});
-
+/*--------------------------------------------*/
+/*---> Download from Firebase <---------------*/
+/*--------------------------------------------*/
+// A function that can be call to get updates from firebase
 function loadQuestions(){
     var newQuestion;
     database.on('child_added', function(update) {
@@ -35,26 +27,11 @@ function loadQuestions(){
     });
 }
 
-// Get an update once the database has new data
-// database.on('child_added', function(update) {
-// 	questions = update.val();
-	
-// 	console.log("Successfully retrieve questions from database.");
-// });
+/*--------------------------------------------*/
+/*---> Upload to Firebase <-------------------*/
+/*--------------------------------------------*/
 
-// database.on("child_added", function(update) { // Get an update once the database has new data
-// 			console.log("Callback function: New data has been added to the database");
-// 			var message = update.val();
-// 			displayUpdate(message.name, message.text);
-// });
-
-function displayUpdate(name, text) {
-	$("<div/>").text(text).prepend($("<em/>").text(name+": ")).appendTo($("#messageDiv"));
-	$("#messageDiv")[0].scrollTop = $("#messageDiv")[0].scrollHeight;
-};
-
-
-// One time push to update the questions on firebase
+// ONE TIME push to update the questions on firebase
 function getData() {
     $.ajax({
         url: questionsLink,
@@ -84,3 +61,33 @@ function uploadFirebase(data){
 }
 
 console.log('LOADED BACKEND');
+
+
+/* Legacy code
+
+$("#upload").click(function() { // If the user clicks on the input with the id="upload"
+	var name = $("#nameInput").val();
+	var text = $("#messageInput").val();
+	if (name.length != 0 && text.length != 0) { // Don't upload if there's no information in the textboxes
+		console.log(name.length);
+		console.log(text.length);
+
+		database.push({name: name, text: text}); // Push the data onto the database
+
+	}else { // warns user of their empty textbox
+		console.log("Please input values into the textbox");
+	}
+});
+
+function displayUpdate(name, text) {
+	$("<div/>").text(text).prepend($("<em/>").text(name+": ")).appendTo($("#messageDiv"));
+	$("#messageDiv")[0].scrollTop = $("#messageDiv")[0].scrollHeight;
+};
+
+database.on("child_added", function(update) { // Get an update once the database has new data
+	console.log("Callback function: New data has been added to the database");
+	var message = update.val();
+	displayUpdate(message.name, message.text);
+});
+
+*/
