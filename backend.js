@@ -106,32 +106,26 @@ function setDefaultTroops(){
 function updateTroops(data) {
 	$.each(data, function(index, value){
 		var path = new Firebase(troopbase.child(value['id']).toString());
-		path.set({
-			id: value['id'], 
-			name: value['name'], 
-			playerID: value['playerID'],
-			towerID: value['towerID'],
-			question: value['question'],
-			alive: value['alive']
-		});
+		if (value['alive'] == false) {
+			path.remove(); 
+		} else {
+			path.set({
+				id: value['id'], 
+				name: value['name'], 
+				playerID: value['playerID'],
+				towerID: value['towerID'],
+				question: value['question'],
+				alive: value['alive']
+			});
+		}
 	});
 }
 // This will remove all the troops in the troops folder
 function removeTroops(data) {
 	$.each(data, function(index, value){
-
+		var path = new Firebase(troopbase.child(value['id']).toString());
+		path.remove();
 	}); 
-	troopbase.once('value', function(snapshot) {
-		snapshot.forEach(function(childSnapshot){
-			// You can also get the key and the value of the child in the troopbase folder
-			//var key = childSnapshot.key();
-			//var childData = childSnapshot.val();
-			if (childSnapshot.val()!="DoNotDelete") {
-				var path = new Firebase(troopbase.child(childSnapshot.key()).toString());
-				path.remove();
-			}
-		});
-	});
 }
 
 
