@@ -52,10 +52,42 @@ function uploadTroops(data) {
 			alive: value['alive']
 		});
 	});
+	setDefaultTroops();
 }
-
+function setDefaultTroops(){
+		towerbase.once('value', function(snapshot){
+		snapshot.forEach(function(childSnapshot){
+			var child = childSnapshot.val();
+			var path = new Firebase(towerbase.child(childSnapshot.key()).toString());
+			path.set({
+				id: childSnapshot.key(),
+				name: child['name'],
+				playerID: child['playerID'],
+				towerID: child['towerID'],
+				question: child['question'],
+				alive: child['child']
+			});
+		});
+	});
+}
+function updateTroops(data) {
+	$.each(data, function(index, value){
+		var path = new Firebase(troopbase.child(value['id']).toString());
+		path.set({
+			id: value['id'], 
+			name: value['name'], 
+			playerID: value['playerID'],
+			towerID: value['towerID'],
+			question: value['question'],
+			alive: value['alive']
+		});
+	});
+}
 // This will remove all the troops in the troops folder
-function removeTroops() {
+function removeTroops(data) {
+	$.each(data, function(index, value){
+
+	}); 
 	troopbase.once('value', function(snapshot) {
 		snapshot.forEach(function(childSnapshot){
 			// You can also get the key and the value of the child in the troopbase folder
