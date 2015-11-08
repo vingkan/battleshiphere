@@ -2,6 +2,7 @@
 // Reference to the root of the Firebase database
 var database = new Firebase("https://conquiz.firebaseio.com/");
 var towerbase = new Firebase("https://towercoord.firebaseio.com/-K2aUIZRYFI5l6Tov1JA/towers");
+var playerbase = new Firebase("https://towercoord.firebaseio.com/-K2aUIZRYFI5l6Tov1JA/players")
 // Reference to the google sheets of questions
 var questionsLink = 'https://spreadsheets.google.com/feeds/list/1C1POJrIlpm1R3muE0ImmI_ifxpH_aEfPP-QSyl3o2Kg/1/public/basic?alt=json';
 
@@ -11,6 +12,27 @@ var rows;
 
 
 // ToDO: downloading from Firebase should be a return function, to avoid crossing stack
+
+/*--------------------------------------------*/
+/*---> Download player from Firebase <--------*/
+/*--------------------------------------------*/
+
+
+/*--------------------------------------------*/
+/*---> Upload player to Firebase <------------*/
+/*--------------------------------------------*/
+function uploadPlayerbase(data) {
+	$.each(data, function(index, value){
+		playerbase.push({
+			id: data['id'], 
+			name: data['name'], 
+			team: {icon: data['icon'], color: data['color']}, 
+			coordinate: {latitude: data['coordinate']['latitude'], longitude: data['coordinate']['longitude']}, 
+			troops: data['troops']
+		});
+	});
+}
+
 
 /*--------------------------------------------*/
 /*---> Download towers from Firebase <--------*/
@@ -30,27 +52,29 @@ function loadTowers() {
 	});
 }
 
+
 /*--------------------------------------------*/
 /*---> Upload towers to Firebase <------------*/
 /*--------------------------------------------*/
 function uploadTowerbase(data) {
-	console.log(data.length);
 	$.each(data, function(index, value){
-		towerbase.push({id: value['id'], name: value['name'], coordinate: {latitude: value['coordinate']['latitude'], longitude: value['coordinate']['longitude']}, size: value['size'], player: value['player'] });
+		towerbase.push({id: value['id'], 
+			name: value['name'], 
+			coordinate: {latitude: value['coordinate']['latitude'], 
+			longitude: value['coordinate']['longitude']}, 
+			size: value['size'], 
+			player: value['player'] });
 	});
 }
-
 // Don't have time - going for hard code
 function removeTowerbase() {
 	// ToDO: Remove the towers folders which will remove the subfolders, recreate a towers folder.
 }
 
 
-
 /*--------------------------------------------*/
 /*---> Download question from Firebase <------*/
 /*--------------------------------------------*/
-// A function that can be call to get updates from firebase
 function loadQuestions() {
     var newQuestion;
     database.on('child_added', function(update) {
@@ -65,11 +89,12 @@ function loadQuestions() {
     });
 }
 
+
+
 /*--------------------------------------------*/
 /*---> Upload question to Firebase <----------*/
-/*--------------------------------------------*/
-
 // ONE TIME push to update the questions on firebase
+/*--------------------------------------------*/
 function getData() {
     $.ajax({
         url: questionsLink,
