@@ -21,7 +21,7 @@ function loadTroops() {
 	var troopHolder = [];
 	var newTroop;
 	troopbase.on('child_added', function(update){
-		if (update['Empty'] != "DoNotDelete")) { //Stops the empty from being pulled
+		if (update['Empty'] != "DoNotDelete") { //Stops the empty from being pulled
 			var troopJSON = update.val();
 			newTroop = new Troop({
 				id: update['id'],
@@ -153,7 +153,7 @@ function loadQuestions() {
     var newQuestion;
     database.on('child_added', function(update) {
         var questionJSON = update.val();
-        console.log(questionJSON)
+        //console.log(questionJSON)
         newQuestion = new Question({
             id: generateNewID('question'),
             question: questionJSON['question'],

@@ -3,7 +3,9 @@ function initGame(){
 		id: 'game0',
 		name: "Sample Game"
 	});
-	//loadQuestions();
+	game.questions = loadQuestions();
+	game.troops = loadTroops();
+	game.players = loadPlayers();
 	createTowerPresets();
 }
 
