@@ -10,10 +10,25 @@ var questionJSON;
 var rows;
 
 
+// ToDO: downloading from Firebase should be a return function, to avoid crossing stack
+
 /*--------------------------------------------*/
 /*---> Download towers from Firebase <--------*/
 /*--------------------------------------------*/
-
+function loadTowers() {
+	var newTower;
+	database.on('child_added', function(update) {
+		var towerJSON = update.val();
+		newTower = new Tower({
+			id: towerJSON['id'],
+			name: towerJSON['name'],
+			coordinate: {latitude: towerJSON['coordinate']['latitude'], longitude: towerJSON['coordinate']['longitude']},
+			size: towerJSON['size'],
+			player: towerJSON['player']
+		});
+		game.push("towers", newTower);
+	});
+}
 
 /*--------------------------------------------*/
 /*---> Upload towers to Firebase <------------*/
@@ -25,8 +40,9 @@ function uploadTowerbase(data) {
 	});
 }
 
+// Don't have time - going for hard code
 function removeTowerbase() {
-	
+	// ToDO: Remove the towers folders which will remove the subfolders, recreate a towers folder.
 }
 
 
@@ -35,7 +51,7 @@ function removeTowerbase() {
 /*---> Download question from Firebase <------*/
 /*--------------------------------------------*/
 // A function that can be call to get updates from firebase
-function loadQuestions(){
+function loadQuestions() {
     var newQuestion;
     database.on('child_added', function(update) {
         var questionJSON = update.val();
