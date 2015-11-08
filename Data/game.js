@@ -54,7 +54,6 @@ Game.prototype.update = function(){
 	for(var i = 0; i < size; i++){
 		circle = this.towers[i].getCircle()
 		map.addObject(circle);
-		console.log(this.towers[i])
 	}
 }
 
@@ -66,7 +65,6 @@ Game.prototype.push = function(list, object){
 
 Game.prototype.getObjectById = function(list, id){
 	var array = this[list];
-	console.log(array);
 	var response = null;
 	var size = array.length;
 	for(var i = 0; i < size; i++){
