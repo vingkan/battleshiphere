@@ -19,6 +19,12 @@ function generateNewID(objectType){
 
 function Game(data){
 	this.id = data['id'];
+	if('secret_key' in data){
+		this.secret_key = data['secret_key'];
+	}
+	else{
+		this.secret_key = Math.random().toString(36).substring(7);
+	}
 	this.name = data['name'];
 	this.players = [];
 	this.towers = [];
@@ -49,7 +55,7 @@ Game.prototype.update = function(){
 		circle = this.towers[i].getCircle()
 		map.addObject(circle);
 		console.log(this.towers[i])
-	}	
+	}
 }
 
 Game.prototype.push = function(list, object){
