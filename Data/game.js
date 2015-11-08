@@ -49,7 +49,7 @@ Game.prototype.set = function(attribute, value){
 }
 
 Game.prototype.update = function(){
-	uploadTowerbase(this.towers);
+	//uploadTowerbase(this.towers);
 }
 
 Game.prototype.push = function(list, object){
