@@ -24,7 +24,9 @@
 		<textarea id="stack-log"></textarea>
 
 		<script type="text/javascript" src="Data/game.js"></script>
+		<script type="text/javascript" src="Data/tower.js"></script>
 		<script type="text/javascript" src="Data/player.js"></script>
+		<script type="text/javascript" src="Data/troop.js"></script>
 		<script type="text/javascript" src="Data/task.js"></script>
 
 		<script type="text/javascript" src="geolocation.js"></script>
@@ -44,6 +46,16 @@
 			color: null,
 			latitude: 0,
 			longitude: 0,
+			troops: null
+		}));
+
+		game.push('towers', new Player({
+			id: generateNewID('tower'),
+			name: generateRandomName(),
+			latitude: 0,
+			longitude: 0,
+			size: 10,
+			player: game.players[0].get('id'),
 			troops: null
 		}));
 
