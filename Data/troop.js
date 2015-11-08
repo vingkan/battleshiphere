@@ -8,6 +8,7 @@ function Troop(data)
 	this.towerID = data['towerID'];
 	this.question = data['question'];
 	this.alive = data['alive'];
+	this.alive = true;
 }
 
 Troop.prototype.get = function(attribute){
@@ -26,15 +27,15 @@ Troop.prototype.toString = function(){
 // How object instantiation works
 // var troop = new Troop({id: "123", name: "troop1", player: "moh", });
 
-/**
-Example object
+
+//Example object
 var someTroop = new Troop({
 	id: "1234",
 	name:"myTroop",
 	playerID: "1",
 	towerID: "1",
 	question: JSON.stringify("[Why?, What?]"),
-	alive: "true"
+	//alive: "true"
 	});
-**/
+
 console.log("troop Loaded");
