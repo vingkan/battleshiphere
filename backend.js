@@ -26,8 +26,8 @@ function getGame() {
 			moode: gameJSON['mode'],
 			name: gameJSON['name'],
 			players: loadPlayers(),
-			//questions: loadQuestions(),
-			questions: [],
+			questions: loadQuestions(),
+			//questions: [],
 			questionLength: parseFloat(gameJSON['questionLength']),
 			rounds: parseFloat(gameJSON['rounds']),
 			spawnRate: parseFloat(gameJSON['spawnRate']),
@@ -281,7 +281,8 @@ function loadQuestions() {
     database.on('child_added', function(update) {
         var questionJSON = update.val();
         newQuestion = new Question({
-            id: generateNewID('questions'),
+            //id: generateNewID('questions'),
+            id: 'question-filler',
             question: questionJSON['question'],
             answers: "["+questionJSON['correct']+", "+questionJSON['wa1']+", "+questionJSON['wa2']+", "+questionJSON['wa3']+"]"
         });

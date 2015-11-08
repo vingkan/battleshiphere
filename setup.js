@@ -8,7 +8,9 @@ function initGame(){
 }
 
 function joinGame(){
+	console.log('before1')
 	game = getGame();
+	console.log('after1')
 	/*game.questions = loadQuestions();
 	game.troops = loadTroops();
 	game.players = loadPlayers();
