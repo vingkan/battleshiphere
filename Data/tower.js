@@ -46,6 +46,24 @@ Tower.prototype.getCircle = function(){
 	return circle;
 }
 
+Tower.prototype.addTroops = function(troops){
+	for (var i = 0; i < troops.length; i++){
+		this.troops.push(troops[i].id);
+		troops[i].set('towerID', this.id);
+	}
+	// database.push(this);
+}
+
+Tower.prototype.getTroopsByPlayer(playerID) = function(id){
+	var troops = this.troops
+	var out = [];
+	for (var i = 0; i < troops.length; i++){
+		if(troops[i].playerID === players)
+		out.push(troops[i].id);
+	}
+	return out
+}
+
 var nick = new Tower({
 	id: "1234",
 	name:"Tower",
